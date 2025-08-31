@@ -1,9 +1,10 @@
 @font-face {
-  font-family: 'Super Mario Bros. NES';
-  src: url('/fonts/SuperMarioBrosNES.eot');
-  src: url('/fonts/SuperMarioBrosNES.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/SuperMarioBrosNES.woff2') format('woff2'),
-       url('/fonts/SuperMarioBrosNES.woff') format('woff');
+  font-family: "Super Mario Bros. NES";
+  src: url("/fonts/SuperMarioBrosNES.eot");
+  src:
+    url("/fonts/SuperMarioBrosNES.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/SuperMarioBrosNES.woff2") format("woff2"),
+    url("/fonts/SuperMarioBrosNES.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -31,12 +32,12 @@
 
 /* Estilos para el cuerpo del documento */
 body {
-  background-image: url('/images/background-large.webp');
+  background-image: url("/images/background-large.webp");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  font-family: 'Super Mario Bros. NES', sans-serif;
+  font-family: "Super Mario Bros. NES", sans-serif;
   color: black;
 }
 
@@ -52,7 +53,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border-bottom: 4px solid black;
-  box-shadow: 0 4px 0 0 rgba(0,0,0,0.75);
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.75);
 }
 
 /* Las secciones de datos de desktop estarán ocultas por defecto */
@@ -86,18 +87,18 @@ body {
 .main__hero {
   /* Nuevo: Elimina display: flex y justificado si solo contiene la imagen para el centrado global */
   /* Si el contenido interno (imagen + h1) necesita centrado, lo haremos en la imagen directamente */
-  
+
   display: flex; /* Mantenemos flex para poder centrar su contenido (la imagen y el título) */
   justify-content: center; /* Centra horizontalmente el contenido del .main__hero */
   align-items: center; /* Centra verticalmente el contenido (útil si el contenedor tiene altura definida) */
-  
+
   margin-top: 50px; /* Margen superior para separarlo del borde */
   margin-left: auto; /* Nuevo: para centrar el bloque horizontalmente */
   margin-right: auto; /* Nuevo: para centrar el bloque horizontalmente */
-  
-  position: relative; 
+
+  position: relative;
   text-align: center; /* Para asegurar que cualquier texto que no sea absolute se centre */
-  
+
   /* Nuevo: Agrega un max-width para achicar el contenedor completo */
   max-width: 90%; /* Ajusta este valor (ej. 80%, 70%) para achicar el cuadro azul */
   /* Si necesitas que la imagen tenga un tamaño fijo en pantallas grandes, puedes usar un ancho fijo aquí */
@@ -109,7 +110,7 @@ body {
   width: 100%; /* La imagen tomará el 100% del ancho de su contenedor (.main__hero) */
   overflow: hidden; /* Importante para que los bordes redondeados se apliquen a la imagen */
   border-radius: 20px; /* Nuevo: bordes redondos (ajusta el valor a tu gusto) */
-  box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.75); /* Opcional: añade una sombra para que resalte */
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.75); /* Opcional: añade una sombra para que resalte */
 
   /* Nuevo: Agrega estas dos líneas para el posicionamiento del pseudo-elemento */
   position: relative;
@@ -118,13 +119,13 @@ body {
 
 /* Pseudo-elemento para el efecto de brillo */
 .main__hero-image-container::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -200%; /* Inicia fuera del contenedor por la izquierda */
   width: 100%;
   height: 100%;
-  
+
   /* Crea un gradiente de luz */
   background: rgba(255, 255, 255, 0.2);
   background: linear-gradient(
@@ -133,10 +134,10 @@ body {
     rgba(255, 255, 255, 0.5) 50%,
     rgba(255, 255, 255, 0) 100%
   );
-  
+
   /* Inclina el brillo para que parezca un reflejo de luz */
   transform: rotate(30deg);
-  
+
   /* Aplica la animación */
   animation: shine 3s infinite; /* 3s es la duración, 'infinite' para que se repita */
 }
@@ -156,7 +157,7 @@ body {
   transform: translate(-50%, -50%);
   font-size: clamp(2rem, 5vw, 4rem);
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   padding: 0 10px;
   width: 100%; /* Asegura que el título ocupe el ancho de su padre para el cálculo del centrado */
   z-index: 2; /* Nuevo: Asegura que el texto esté encima del efecto de brillo */
@@ -200,8 +201,10 @@ body {
   background-color: white;
   border: 4px solid black;
   border-radius: 5px;
-  box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
-  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
   cursor: pointer;
 }
 
@@ -215,7 +218,11 @@ body {
   text-align: center;
 
   /* Nuevo: para que el texto se ajuste al tamaño */
-  font-size: clamp(1rem, 4vw, 1.2em); /* El texto se ajusta entre 1rem y 1.2em */
+  font-size: clamp(
+    1rem,
+    4vw,
+    1.2em
+  ); /* El texto se ajusta entre 1rem y 1.2em */
   white-space: nowrap; /* Evita que el texto se parta en varias líneas */
   overflow: hidden; /* Oculta cualquier texto que se desborde */
   text-overflow: ellipsis; /* Añade puntos suspensivos (...) al final del texto desbordado */
@@ -224,8 +231,8 @@ body {
 /* Modificador: Estado hover */
 .menu__item:hover {
   transform: translateY(-5px);
-  box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
-  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.75);
+  animation: shake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
@@ -233,10 +240,23 @@ body {
 
 /* Animación de "vibración" */
 @keyframes shake {
-  10%, 90% { transform: translate3d(-1px, 0, 0); }
-  20%, 80% { transform: translate3d(2px, 0, 0); }
-  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-  40%, 60% { transform: translate3d(4px, 0, 0); }
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 /* ==================================== */
@@ -248,119 +268,120 @@ body {
 */
 main > picture,
 main > img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
-    max-width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  max-width: 90%;
 }
 
 main > img {
-    margin-top: -2rem; /* Pequeño ajuste para que se superponga un poco */
+  margin-top: -2rem; /* Pequeño ajuste para que se superponga un poco */
 }
-
 
 /* Contenedor principal del formulario de login */
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem; /* Espacio entre el título, el form y el mensaje */
-    
-    max-width: 450px; /* Ancho máximo para que no se estire demasiado en pantallas grandes */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem; /* Espacio entre el título, el form y el mensaje */
 
-    /* La magia de Mario Bros: fondo blanco, borde y sombra de bloque */
-    background-color: white;
-    border: 4px solid black;
-    border-radius: 10px;
-    box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.75);
+  max-width: 450px; /* Ancho máximo para que no se estire demasiado en pantallas grandes */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  padding: 2rem;
+
+  /* La magia de Mario Bros: fondo blanco, borde y sombra de bloque */
+  background-color: white;
+  border: 4px solid black;
+  border-radius: 10px;
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.75);
 }
 
 /* Título del formulario */
 .login-container__title {
-    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Tamaño de fuente adaptable */
-    text-align: center;
+  font-size: clamp(1.8rem, 5vw, 2.5rem); /* Tamaño de fuente adaptable */
+  text-align: center;
 }
 
 /* Formulario */
 .login-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 1.5rem; /* Espacio entre los campos de email, pass y el botón */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem; /* Espacio entre los campos de email, pass y el botón */
 }
 
 /* Contenedor de cada campo (label + input) */
 .login-form__field {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* Etiqueta (label) de los campos */
 .login-form__label {
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    color: var(--dark-grey);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--dark-grey);
 }
 
 /* Campo de texto (input) */
 .login-form__input {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    
-    /* Hereda la fuente de Mario del body */
-    font-family: inherit; 
-    
-    border: 2px solid black;
-    border-radius: 5px;
-    
-    /* Quita cualquier estilo por defecto del navegador */
-    appearance: none;
-    background-color: var(--light-grey);
-    transition: background-color 0.2s ease;
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1.1rem;
+
+  /* Hereda la fuente de Mario del body */
+  font-family: inherit;
+
+  border: 2px solid black;
+  border-radius: 5px;
+
+  /* Quita cualquier estilo por defecto del navegador */
+  appearance: none;
+  background-color: var(--light-grey);
+  transition: background-color 0.2s ease;
 }
 
 /* Estilo cuando el input está seleccionado (en foco) */
 .login-form__input:focus {
-    outline: 2px solid var(--primary-color);
-    background-color: white;
+  outline: 2px solid var(--primary-color);
+  background-color: white;
 }
 
 /* Botón de Ingresar, inspirado en .menu__item */
 .login-form__button {
-    padding: 15px 30px;
-    font-size: 1.2em;
-    font-family: inherit;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    
-    background-color: var(--primary-color); /* Un color llamativo de tu paleta */
-    border: 4px solid black;
-    border-radius: 5px;
-    box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
-    
-    cursor: pointer;
-    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-family: inherit;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+
+  background-color: var(--primary-color); /* Un color llamativo de tu paleta */
+  border: 4px solid black;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+
+  cursor: pointer;
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
 }
 
 /* El mismo efecto de hover que los botones del menú */
 .login-form__button:hover {
-    transform: translateY(-5px);
-    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
-    animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translateY(-5px);
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.75);
+  animation: shake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 /* Contenedor para los mensajes de éxito o error */
 .login-container__message {
-    min-height: 1.5em; /* Evita que el layout "salte" cuando aparece un mensaje */
-    font-size: 1rem;
-    text-align: center;
-    font-weight: bold;
+  min-height: 1.5em; /* Evita que el layout "salte" cuando aparece un mensaje */
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* ========================================= */
@@ -369,159 +390,161 @@ main > img {
 
 /* Contenedor principal de la página del juego */
 .game-layout {
-    display: flex;
-    flex-direction: column; /* En móvil, la grilla y las pistas se apilan */
-    align-items: center;
-    gap: 2rem;
-    padding: 1.5rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column; /* En móvil, la grilla y las pistas se apilan */
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  width: 100%;
 }
 
 /* Contenedor de la grilla del crucigrama */
 .crossword-game__container {
-    display: grid;
-    /* Usamos tu variable --grid-size que se establece desde JS */
-    grid-template-columns: repeat(var(--grid-size, 15), 1fr);
-    
-    /* El estilo de bloque de Mario! */
-    border: 4px solid black;
-    box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.75);
-    background-color: white;
-    
-    /* Hacemos que las celdas sean cuadradas */
-    aspect-ratio: 1 / 1;
-    width: 100%;
-    max-width: 600px; /* Evita que sea gigante en pantallas grandes */
+  display: grid;
+  /* Usamos tu variable --grid-size que se establece desde JS */
+  grid-template-columns: repeat(var(--grid-size, 15), 1fr);
+
+  /* El estilo de bloque de Mario! */
+  border: 4px solid black;
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.75);
+  background-color: white;
+
+  /* Hacemos que las celdas sean cuadradas */
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 600px; /* Evita que sea gigante en pantallas grandes */
 }
 
 /* Celdas individuales de la grilla */
 .crossword-game__cell {
-    position: relative;
-    border: 1px solid var(--dark-grey); /* Líneas de la grilla más sutiles */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  border: 1px solid var(--dark-grey); /* Líneas de la grilla más sutiles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Celdas vacías, como bloques sólidos del juego */
 .crossword-game__cell--empty {
-    background-color: var(--tertiary-color);
-    border-color: var(--tertiary-color);
+  background-color: var(--tertiary-color);
+  border-color: var(--tertiary-color);
 }
 
 /* Input dentro de cada celda */
 .crossword-game__input {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    
-    border: none;
-    text-align: center;
-    text-transform: uppercase;
-    background-color: transparent;
-    
-    /* Usamos la fuente del juego y la hacemos más grande */
-    font-family: inherit;
-    font-size: clamp(0.8rem, 5vw / var(--grid-size, 15), 1.5rem);
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 
-    /* Quita el borde que aparece al hacer clic */
-    outline: none; 
-    caret-color: var(--primary-color); /* Color del cursor al escribir */
+  border: none;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: transparent;
+
+  /* Usamos la fuente del juego y la hacemos más grande */
+  font-family: inherit;
+  font-size: clamp(0.8rem, 5vw / var(--grid-size, 15), 1.5rem);
+
+  /* Quita el borde que aparece al hacer clic */
+  outline: none;
+  caret-color: var(--primary-color); /* Color del cursor al escribir */
 }
 
 /* Cuando un input está activo, le damos un borde llamativo */
 .crossword-game__input:focus {
-    background-color: rgba(240, 168, 104, 0.2);
-    outline: 3px solid var(--primary-color);
-    outline-offset: -3px;
+  background-color: rgba(240, 168, 104, 0.2);
+  outline: 3px solid var(--primary-color);
+  outline-offset: -3px;
 }
 
 /* Celdas pre-llenadas (intersecciones) */
 .crossword-game__cell--prefilled {
-    background-color: var(--light-grey);
+  background-color: var(--light-grey);
 }
 .crossword-game__cell--prefilled .crossword-game__input {
-    font-weight: bold;
-    color: var(--dark-grey);
+  font-weight: bold;
+  color: var(--dark-grey);
 }
 
 /* El número de la pista dentro de la celda */
 .crossword-game__number {
-    position: absolute;
-    top: 1px;
-    left: 2px;
-    font-size: 0.6em;
-    font-weight: normal; /* La fuente ya es bastante gruesa */
-    color: var(--secondary-color);
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  font-size: 0.6em;
+  font-weight: normal; /* La fuente ya es bastante gruesa */
+  color: var(--secondary-color);
 }
 
 /* Contenedor de las pistas (horizontales y verticales) */
 .crossword-clues {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
 }
 
 /* Cada lista de pistas (Horizontales / Verticales) */
 .crossword-clues__list {
-    padding: 1.5rem;
-    
-    /* El mismo estilo de panel que el login y el menú */
-    background-color: white;
-    border: 4px solid black;
-    border-radius: 10px;
-    box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.75);
+  padding: 1.5rem;
+
+  /* El mismo estilo de panel que el login y el menú */
+  background-color: white;
+  border: 4px solid black;
+  border-radius: 10px;
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.75);
 }
 
 .crossword-clues__list h3 {
-    margin-bottom: 1rem;
-    font-size: 1.5em;
-    color: var(--primary-color);
-    text-shadow: 2px 2px 0px black;
+  margin-bottom: 1rem;
+  font-size: 1.5em;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 0px black;
 }
 
 .crossword-clues__list p {
-    font-size: 1em;
-    line-height: 1.5;
-    margin-bottom: 0.5rem;
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
 }
 
 /* Botones de "Comenzar" y "Enviar" */
 .crossword-game__start-button,
 .crossword-game__submit-button {
-    /* Reutilizamos el estilo de los botones principales */
-    padding: 15px 30px;
-    font-size: 1.2em;
-    font-family: inherit;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    background-color: var(--primary-color);
-    border: 4px solid black;
-    border-radius: 5px;
-    box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
-    cursor: pointer;
-    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
-    margin-top: 1rem; /* Espacio extra */
-    width: 100%; /* Ocupa el ancho disponible del contenedor flex */
-    max-width: 300px; /* Pero no más de 300px, como los botones del menú */
-    align-self: center; /* Se asegura de que esté centrado si el layout cambia */
+  /* Reutilizamos el estilo de los botones principales */
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-family: inherit;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  border: 4px solid black;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
+  margin-top: 1rem; /* Espacio extra */
+  width: 100%; /* Ocupa el ancho disponible del contenedor flex */
+  max-width: 300px; /* Pero no más de 300px, como los botones del menú */
+  align-self: center; /* Se asegura de que esté centrado si el layout cambia */
 }
 
 .crossword-game__start-button:hover,
 .crossword-game__submit-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
-    animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translateY(-5px);
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.75);
+  animation: shake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 /* Estilos de la pantalla de inicio del juego */
 .crossword-game__start-screen {
-    text-align: center;
-    padding: 2rem;
+  text-align: center;
+  padding: 2rem;
 }
 
 /* ==================================== */
@@ -542,59 +565,62 @@ main > img {
   .mobile-menu {
     display: none;
   }
-  
+
   /* Ajusta el max-width del hero para pantallas más grandes si es necesario */
   .main__hero {
-      max-width: 60%; /* Por ejemplo, para que en escritorio no sea tan ancha */
+    max-width: 60%; /* Por ejemplo, para que en escritorio no sea tan ancha */
   }
 
   /* Ajusta el margen superior para pantallas grandes si quieres más espacio */
   .main__hero {
-      margin-top: 80px; /* Más espacio arriba en pantallas grandes */
+    margin-top: 80px; /* Más espacio arriba en pantallas grandes */
   }
 
   /* Puedes ajustar el tamaño de fuente para el título en pantallas grandes */
   .main__hero-title {
-      font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(3rem, 6vw, 5rem);
   }
 
   .menu-title {
-      font-size: 3em;
+    font-size: 3em;
   }
 
   .menu {
-      /* Usamos Grid para crear un diseño de dos columnas */
-      display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual ancho */
-      gap: 20px; /* Espacio entre las columnas y las filas */
-      justify-items: center; /* Centramos los ítems horizontalmente dentro de cada celda */
+    /* Usamos Grid para crear un diseño de dos columnas */
+    display: grid;
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Crea dos columnas de igual ancho */
+    gap: 20px; /* Espacio entre las columnas y las filas */
+    justify-items: center; /* Centramos los ítems horizontalmente dentro de cada celda */
   }
 
   .menu__item {
-      max-width: none; /* Quitamos el max-width para que los items se adapten al grid */
-      width: 100%; /* El ítem ocupa todo el ancho disponible en su columna */
-      height: 100%; /* Para que todos los botones tengan la misma altura */
+    max-width: none; /* Quitamos el max-width para que los items se adapten al grid */
+    width: 100%; /* El ítem ocupa todo el ancho disponible en su columna */
+    height: 100%; /* Para que todos los botones tengan la misma altura */
   }
 
   .menu__link {
-      font-size: 1.5em; /* Reducimos el tamaño de la fuente para que quepa en la caja */
-      padding: 15px; /* Un padding más uniforme para que el texto no se pegue */
-      white-space: nowrap; /* Evita que el texto se salte a la siguiente línea */
+    font-size: 1.5em; /* Reducimos el tamaño de la fuente para que quepa en la caja */
+    padding: 15px; /* Un padding más uniforme para que el texto no se pegue */
+    white-space: nowrap; /* Evita que el texto se salte a la siguiente línea */
   }
   /* Dentro de @media screen and (min-width: 768px) */
 
   .game-layout {
-      flex-direction: row; /* En desktop, se ponen lado a lado */
-      align-items: flex-start; /* Se alinean arriba */
-      justify-content: center;
+    flex-direction: row; /* En desktop, se ponen lado a lado */
+    align-items: flex-start; /* Se alinean arriba */
+    justify-content: center;
   }
 
   .crossword-game__container {
-      width: 60%; /* La grilla ocupa el 60% */
+    width: 60%; /* La grilla ocupa el 60% */
   }
 
   .crossword-clues {
-      width: 40%; /* Las pistas ocupan el 40% */
-      max-width: 400px; /* Pero no más de 400px */
+    width: 40%; /* Las pistas ocupan el 40% */
+    max-width: 400px; /* Pero no más de 400px */
   }
 }

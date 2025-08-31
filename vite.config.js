@@ -10,6 +10,9 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         login: resolve(__dirname, "src/login/index.html"),
+        puzzles: resolve(__dirname, "src/puzzles/index.html"),
+        crossword: resolve(__dirname, "src/puzzles/crosswords.html"),
+        schedule: resolve(__dirname, "src/schedule/index.html"),
       },
     },
   },

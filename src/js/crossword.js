@@ -1,4 +1,4 @@
-import CrosswordGame from './CrosswordGame.mjs';
+import CrosswordGame from "./CrosswordGame.mjs";
 
-const crosswordGame = new CrosswordGame('crossword-container');
+const crosswordGame = new CrosswordGame("crossword-container");
 crosswordGame.init();
