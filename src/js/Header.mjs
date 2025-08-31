@@ -59,6 +59,21 @@ export async function loadHeader() {
 
         headerElement.innerHTML = leftSection + centerSection + rightSection + mobileMenu;
 
+        // Seleccionamos el ícono del menú que acabamos de renderizar
+        const menuIcon = qs('.mobile-menu__icon--mushroom');
+
+        if (menuIcon) {
+            // Agregamos el "escuchador" de eventos de clic
+            menuIcon.addEventListener('click', (event) => {
+                // Prevenimos el comportamiento por defecto del enlace (que no recargue la página)
+                event.preventDefault();
+                
+                // Agregamos o quitamos la clase 'main-header--mobile-open' en el elemento <header>
+                // Esto funciona como un interruptor (toggle)
+                headerElement.classList.toggle('main-header--mobile-open');
+            });
+        }
+
     } catch (error) {
         console.error("Error al cargar el header:", error);
         headerElement.innerHTML = '<p>Error al cargar datos del perfil.</p>';

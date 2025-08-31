@@ -54,6 +54,10 @@ body {
   align-items: center;
   border-bottom: 4px solid black;
   box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.75);
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 /* Las secciones de datos de desktop estarán ocultas por defecto */
@@ -61,6 +65,29 @@ body {
 .main-header__center-section,
 .main-header__right-section {
   display: none;
+}
+
+/* Cuando el header tiene la clase '--mobile-open', mostramos las secciones */
+.main-header--mobile-open .main-header__left-section,
+.main-header--mobile-open .main-header__right-section {
+    display: flex; /* Cambiamos de 'none' a 'flex' para que sean visibles */
+    flex-direction: column; /* Apilamos la info ("Nombre", "Compañía", etc.) */
+    align-items: flex-start; /* Alineamos el texto a la izquierda */
+    width: 100%; /* Hacemos que ocupe todo el ancho */
+    gap: 8px; /* Un pequeño espacio entre cada línea de información */
+}
+
+/* Damos un poco de espacio y orden para que se vea como un menú desplegado */
+.main-header--mobile-open .main-header__left-section {
+    order: 10; /* Le decimos que se ponga después de la barra principal del menú */
+    padding-top: 15px;
+    border-top: 2px solid rgba(0, 0, 0, 0.5); /* Línea separadora opcional */
+    margin-top: 10px;
+}
+
+.main-header--mobile-open .main-header__right-section {
+    order: 11; /* Después de la sección izquierda */
+    padding-bottom: 15px;
 }
 
 /* El menú móvil sí se mostrará por defecto */
@@ -176,9 +203,11 @@ body {
 
 /* Estilos para el encabezado del menú */
 .menu-title {
-  font-size: 2.5em; /* Tamaño de fuente para móviles */
+  font-size: 2.2em; /* Tamaño de fuente para móviles */
   text-align: center;
   margin: 20px 0;
+  color: white; /* Hacemos el texto blanco */
+  text-shadow: 4px 4px 0px black; /* Añadimos una sombra dura estilo 8-bit */
 }
 
 /* ==================================== */
@@ -382,6 +411,61 @@ main > img {
   font-size: 1rem;
   text-align: center;
   font-weight: bold;
+}
+
+.schedule-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: white;
+    border-left: 8px solid; /* El borde izquierdo tendrá el color de estado */
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+}
+
+.schedule-item__time {
+    font-size: 1.5em;
+    font-weight: bold;
+    min-width: 70px; /* Ancho fijo para alinear bien los títulos */
+    text-align: center;
+    flex-shrink: 0; /* Esto prohíbe que este elemento se haga más pequeño */
+}
+
+.schedule-item__title {
+    font-size: 1.2em;
+    flex: 1; /* Abreviatura de flex-grow: 1, flex-shrink: 1. Ocupará todo el espacio sobrante */
+    word-break: break-word; /* Permite que palabras largas se corten si es necesario */
+}
+
+/* Modificadores de estado (¡la magia de los colores!) */
+.schedule-item--upcoming {
+    border-left-color: black; /* Negro para futuras */
+    color: black;
+}
+
+.schedule-item--inprogress {
+    border-left-color: #2E7D32; /* Verde para la actual */
+    color: #2E7D32;
+    transform: scale(1.05); /* Opcional: la hacemos resaltar un poco */
+    box-shadow: 8px 8px 0px 0px rgba(46, 125, 50, 0.5);
+}
+
+.schedule-item--finished {
+    border-left-color: #C62828; /* Rojo para pasadas */
+    color: #757575; /* Un gris para que se vea "apagada" */
+    text-decoration: line-through; /* Opcional: la tachamos */
 }
 
 /* ========================================= */
