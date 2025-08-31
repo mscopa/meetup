@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MeetUp | Acceso</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <header class="divider" id="header"></header>
+    <main class="divider">
+        <picture>
+            <source media="(min-width: 800px)" srcset="/images/login/welcome.png" />
+            <source media="(min-width: 400px)" srcset="/images/login/welcome-medium.png" />
+            <source media="(max-width: 399px)" srcset="/images/login/welcome-small.png" />
+        </picture>
+        <img src="/images/login/super-meetup2025.png" alt="Bienvenidos al Super MeetUp 2025" />
+        <div class="login-container">
+            <h1 class="login-container__title">Iniciar Sesión</h1>
+
+            <form class="login-form" id="login-form">
+                <div class="login-form__field">
+                    <label for="email" class="login-form__label">Correo Electrónico</label>
+                    <input type="email" id="email" class="login-form__input" required>
+                </div>
+
+                <div class="login-form__field">
+                    <label for="password" class="login-form__label">Contraseña</label>
+                    <input type="password" id="password" class="login-form__input" required>
+                </div>
+
+                <button type="submit" class="login-form__button">Ingresar</button>
+            </form>
+
+            <div id="login-message" class="login-container__message"></div>
+        </div>
+    </main>
+    <footer id="footer"></footer>
+    <script src="/js/login.js" type="module"></script>
+</body>
+
+</html>
