@@ -25,7 +25,7 @@ loginForm.addEventListener('submit', async (event) => {
         
         // Redirigimos al dashboard después de un segundo
         setTimeout(() => {
-            window.location.href = '/dashboard.html'; // O a donde quieras ir
+            window.location.href = '/index.html'; // O a donde quieras ir
         }, 1000);
 
     } else {
