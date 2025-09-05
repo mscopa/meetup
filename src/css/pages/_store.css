@@ -1,0 +1,211 @@
+.product-grid {
+  display: grid;
+  /* 1. FORZAMOS 2 COLUMNAS: le decimos que siempre haya 2 columnas de igual tamaño (1fr) */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; /* Un poco menos de espacio para pantallas chicas */
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 600px) {
+  .product-grid {
+    /* En pantallas más grandes, podemos permitir más columnas o más espacio */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Bloque: Tarjeta de Producto */
+.product-card {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-text-primary);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-main);
+  text-align: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modificador: Agotado */
+.product-card--out-of-stock {
+  opacity: 0.5;
+  position: relative;
+}
+.product-card--out-of-stock::after {
+  content: "AGOTADO";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  background-color: #c62828;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.product-card__image {
+  /* 2. IMÁGENES RESPONSIVAS: Hacemos que la imagen se ajuste a su contenedor */
+  width: 100%; /* Ocupa el 100% del espacio disponible */
+  max-width: 120px; /* Pero nunca más de 120px */
+  height: auto; /* Mantiene la proporción */
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1rem;
+  object-fit: contain; /* Asegura que la imagen no se deforme */
+}
+
+.product-card__name {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  flex-grow: 1; /* Para alinear los botones abajo */
+}
+
+.product-card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.product-card__price {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product-card__price img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pagination__link {
+  padding: 8px 12px;
+  border: 2px solid var(--color-text-primary);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-family: var(--font-family-main);
+  cursor: pointer;
+}
+.pagination__link--active {
+  background-color: var(--color-primary);
+  font-weight: bold;
+}
+.pagination__link--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ... al final de _store.css ... */
+.quantity-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.quantity-selector__btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--color-text-primary);
+  background-color: var(--color-background-input);
+  font-family: var(--font-family-main);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.quantity-selector__value {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.product-card__buy-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-primary);
+}
+.product-card__buy-btn:disabled {
+  background-color: var(--color-background-input);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- NUEVOS ESTILOS PARA EL HISTORIAL --- */
+.transaction-history {
+  margin-top: 3rem;
+  max-width: 700px;
+  width: 100%;
+}
+
+.history-title {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-inverse);
+  text-shadow: 2px 2px 0 var(--color-text-primary);
+}
+
+.history-item {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-text-primary);
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto; /* Columna para info, columna para status */
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+
+.history-item__product {
+  grid-column: 1 / -1; /* Ocupa todo el ancho */
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.history-item__code {
+  font-family: monospace;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  background-color: var(--color-background-input);
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.history-item__status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: var(--color-text-inverse);
+  font-size: 0.8rem;
+  text-align: center;
+  justify-self: end; /* Alinear a la derecha */
+}
+
+/* Modificadores de estado */
+.history-item__status--pending {
+  background-color: #f9a825; /* Amarillo */
+}
+.history-item__status--retrieved {
+  background-color: #2e7d32; /* Verde */
+}
+
+.store-warning {
+  color: #e53935; /* Rojo */
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  min-height: 2.5em; /* Para evitar que la página "salte" */
+}

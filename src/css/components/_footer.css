@@ -1,0 +1,8 @@
+.footer-link {
+  display: block; /* Para que ocupe todo el ancho */
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--color-text-inverse);
+  text-shadow: 2px 2px 0 var(--color-text-primary);
+  text-decoration: none;
+}

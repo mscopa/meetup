@@ -1,0 +1,30 @@
+/* src/css/components/_buttons.css */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 15px 30px;
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  text-align: center;
+  border: var(--border-width-main) solid var(--color-text-primary);
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 0 rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+}
+
+.btn--secondary {
+  background-color: var(--color-surface);
+}

@@ -1,0 +1,104 @@
+.main-container {
+  padding: 0 1rem; /* Evita que el contenido se pegue a los bordes */
+}
+
+.main-container__title {
+  text-align: center;
+  color: var(--color-text-inverse); /* Usamos la variable para texto blanco */
+  text-shadow: 3px 3px 0 var(--color-text-primary); /* Sombra para legibilidad */
+  margin: 2rem 0; /* Más espacio arriba y abajo */
+  font-size: 2rem;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.schedule__loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2rem;
+}
+
+/* Bloque: Item del Cronograma */
+.schedule-item {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-text-primary);
+  border-left-width: 8px; /* Borde izquierdo grueso para el estado */
+  border-radius: 5px;
+  box-shadow: var(--box-shadow-main);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Elemento: El header clickeable del item */
+.schedule-item__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.schedule-item__time {
+  font-size: 1.3rem;
+  font-weight: bold;
+  min-width: 120px;
+  text-align: center;
+}
+
+.schedule-item__title {
+  font-size: 1.1rem;
+  flex-grow: 1; /* Ocupa el espacio restante */
+}
+
+/* Elemento: El contenido expandible */
+.schedule-item__details {
+  max-height: 0; /* Oculto por defecto */
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease-out,
+    padding 0.4s ease-out; /* Animación suave */
+  padding: 0 1.5rem; /* Sin padding vertical cuando está cerrado */
+  border-top: 2px dashed var(--color-background-input);
+}
+
+.detail-section {
+  margin-bottom: 1rem;
+}
+
+.detail-section__title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.detail-section__list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+/* Modificador: Cuando el item está activo/abierto */
+.schedule-item--active .schedule-item__details {
+  max-height: 2000px; /* Un valor alto para permitir que el contenido se expanda */
+  padding: 1.5rem;
+}
+
+/* Modificadores: Estados de la actividad */
+.schedule-item--finished {
+  border-left-color: #c62828; /* Rojo */
+  opacity: 0.7;
+}
+
+.schedule-item--in-progress {
+  border-left-color: #2e7d32; /* Verde */
+  transform: scale(1.02);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.schedule-item--upcoming {
+  border-left-color: #f9a825; /* Amarillo */
+}

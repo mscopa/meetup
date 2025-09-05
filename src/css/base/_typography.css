@@ -1,0 +1,20 @@
+/* src/css/base/_typography.css */
+@font-face {
+  font-family: "Super Mario Bros. NES";
+  src:
+    url("../../assets/fonts/SuperMarioBrosNES.woff2") format("woff2"),
+    url("../../assets/fonts/SuperMarioBrosNES.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background-image: url("../../assets/images/background.jpg"); /* Usá la imagen que corresponda */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: var(--font-family-main);
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,50 @@
+<div class="main-header">
+  <div class="main-header__icon main-header__icon--menu" id="menu-toggle-btn">
+    <img src="/assets/images/menu-icon.png" alt="Menú" />
+  </div>
+
+  <div id="header-coin-display" class="company-header__coins hidden">
+    <img
+      src="/assets/images/mario-coin.png"
+      alt="Moneda"
+      class="company-header__coin-img"
+    />
+    <span id="header-coins-value" class="company-header__coin-value"></span>
+  </div>
+
+  <a href="/announcements/" class="main-header__icon main-header__icon--star">
+    <img src="/assets/images/star-icon.png" alt="Notificaciones" />
+    <span class="notification-dot hidden"></span>
+  </a>
+</div>
+
+<div class="overlay hidden" id="overlay"></div>
+
+<aside class="side-menu" id="side-menu">
+  <div class="side-menu__header">
+    <h3>Detalles del Perfil</h3>
+    <button class="side-menu__close-btn" id="menu-close-btn">&times;</button>
+  </div>
+  <div class="side-menu__content">
+    <div id="company-header" class="company-header hidden">
+      <p><strong>Compañía:</strong> <span id="company-number"></span></p>
+      <p><strong>Nombre:</strong> <span id="company-name"></span></p>
+      <p><strong>Salón:</strong> <span id="company-room"></span></p>
+      <p><strong>Puntaje:</strong> <span id="company-score"></span></p>
+      <div class="company-header__coins">
+        <img
+          src="/assets/images/mario-coin.png"
+          alt="Moneda"
+          class="company-header__coin-img"
+        />
+        <span id="company-coins-value-menu"></span>
+      </div>
+      <p class="company-header__war-cry">
+        <strong>Grito:</strong> <span id="company-war-cry"></span>
+      </p>
+      <a href="#" id="logout-button" class="btn btn--primary">Salir</a>
+    </div>
+
+    <div id="admin-header" class="admin-header hidden"></div>
+  </div>
+</aside>

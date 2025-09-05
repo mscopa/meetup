@@ -1,36 +1,40 @@
-import { loadHeader } from "./Header.mjs";
-import Auth from "./Auth.mjs"; // Asegúrate que la ruta al módulo sea correcta
+import AuthState from "./services/AuthState.mjs";
+import { loadHeader, loadFooter } from "./utils/dom-loader.js";
 
-// 1. Creamos una instancia de nuestro manejador de autenticación
-const auth = new Auth();
+document.addEventListener("DOMContentLoaded", () => {
+  const publicRoutes = ["/login/", "/register/"];
 
-// 2. ¡EL GUARDIA! Esta es la verificación principal.
-// Se ejecuta inmediatamente cuando se carga el script.
-if (!auth.isLoggedIn()) {
-  // Si el método isLoggedIn() devuelve false (porque no hay token)...
-  console.log("Acceso denegado. Redirigiendo al login...");
+  const currentPath = window.location.pathname;
+  console.log(currentPath);
+  if (!publicRoutes.includes(currentPath) && !AuthState.isAuthenticated()) {
+    window.location.href = "/login/";
+    return;
+  }
 
-  // ...redirigimos al usuario a la página de login.
-  // Usamos replace() para que el usuario no pueda usar el botón "Atrás" del navegador
-  // para volver a la página protegida.
-  window.location.replace("/login/index.html");
-} else {
-  // 3. Si el guardia nos deja pasar (porque sí hay un token)...
-  console.log("Acceso permitido. Cargando la aplicación principal...");
+  if (AuthState.isAuthenticated()) {
+    loadHeader(); // Esta función podría usar ExternalServices.getProfileHeader() para poner el nombre del usuario
+    loadFooter();
+  }
 
-  // ...entonces todo el código que carga tu página principal va aquí dentro.
-  initializeApp();
-}
-
-// 4. Envuelve el resto de tu lógica en una función.
-function initializeApp() {
-  // TODO: Todo tu código existente de main.js va aquí.
-  // Por ejemplo:
-  loadHeader();
-  // showPuzzles();
-  // etc.
-
-  const user = auth.getUser();
-  console.log(`Bienvenido de nuevo, ${user.first_name}! Rol: ${user.role}`);
-}
-initializeApp();
+  // Lógica para cargar el JS específico de cada página
+  // Podrías tener una lógica más avanzada aquí (un "router" simple)
+  if (currentPath === "/") {
+    import("./pages/home.js");
+  } else if (currentPath.startsWith("/announcements")) {
+    import("./pages/announcements.js");
+  } else if (currentPath.startsWith("/schedule")) {
+    import("./pages/schedule.js");
+  } else if (currentPath.startsWith("/store")) {
+    import("./pages/store.js");
+  } else if (/^\/puzzles\/\d+/.test(currentPath)) {
+    // REGLA ESPECÍFICA PRIMERO
+    import("./pages/puzzle-play.js");
+  } else if (currentPath.startsWith("/puzzles")) {
+    // REGLA GENERAL DESPUÉS
+    import("./pages/puzzles.js");
+  } else if (currentPath.startsWith("/company")) {
+    import("./pages/company.js");
+  } else if (currentPath.startsWith("/login")) {
+    import("./pages/login.js");
+  }
+});

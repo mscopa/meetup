@@ -1,0 +1,11 @@
+.card {
+  background-color: var(--color-surface);
+  border: var(--border-width-main) solid var(--color-text-primary);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-main);
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px; /* Ancho máximo para el contenedor */
+  margin-left: auto;
+  margin-right: auto;
+}

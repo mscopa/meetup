@@ -1,0 +1,93 @@
+/* src/css/pages/_company.css */
+
+.company-info {
+  background-color: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: var(--border-width-main) solid var(--color-text-primary);
+  box-shadow: var(--box-shadow-main);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.company-info__name {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.company-info__stats {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.1rem;
+}
+
+.member-list__title {
+  text-align: center;
+  color: var(--color-text-inverse);
+  text-shadow: 3px 3px 0 var(--color-text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Bloque: Tarjeta de Miembro */
+.member-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-surface);
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  border: 2px solid var(--color-text-primary);
+  transition: opacity 0.3s;
+}
+
+/* Modificador: Para los que no asistieron */
+.member-card[data-attended="0"] {
+  opacity: 0.5;
+}
+
+.member-card[data-attended="0"] .member-card__name {
+  text-decoration: line-through;
+}
+
+/* Elemento: Insignia de Rol */
+.member-card__badge {
+  flex-shrink: 0; /* Evita que se encoja */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-text-primary);
+}
+
+/* Modificador: Insignia de Participante */
+.member-card__badge--participant {
+  background-color: #8b4513; /* Marrón */
+}
+
+/* Modificador: Insignia de Consejero */
+.member-card__badge--counselor {
+  background-color: #2e7d32; /* Verde */
+}
+
+/* Modificador: Insignia de Consejero Auxiliar */
+.member-card__badge--auxiliary {
+  background-color: #558b2f; /* Verde más claro */
+}
+
+/* Elemento: Nombre del Miembro */
+.member-card__name {
+  font-size: 1.1rem;
+}

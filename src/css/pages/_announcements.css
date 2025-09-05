@@ -1,0 +1,63 @@
+/* src/css/pages/_announcements.css */
+
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 700px; /* Ancho máximo para el contenido */
+  margin: 0 auto; /* Centramos la lista */
+}
+
+/* Estilos base (Mobile) para cada tarjeta de anuncio */
+.announcement-card {
+  background-color: var(--color-surface);
+  border-left: 8px solid var(--color-primary); /* Borde de acento más grueso */
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow-main);
+}
+
+.announcement-card__title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+/* Contenedor para la metadata (autor y fecha) */
+.announcement-card__meta {
+  display: flex;
+  flex-direction: column; /* En mobile, uno arriba del otro */
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: #555;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--color-background-input);
+  padding-bottom: 0.75rem;
+}
+
+.announcement-card__author {
+  font-weight: bold;
+}
+
+.announcement-card__message {
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap; /* Respeta los saltos de línea del mensaje */
+}
+
+/* Estilos para pantallas más grandes (Desktop) */
+@media (min-width: 768px) {
+  .announcement-card {
+    padding: 1.5rem;
+  }
+
+  .announcement-card__title {
+    font-size: 1.8rem;
+  }
+
+  .announcement-card__meta {
+    flex-direction: row; /* En desktop, uno al lado del otro */
+    justify-content: space-between;
+    align-items: center;
+  }
+}

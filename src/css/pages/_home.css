@@ -1,0 +1,25 @@
+.home-hero {
+  background-image: url("../../assets/images/img-title-desktop.webp"); /* Nubes */
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 1rem;
+  margin: 2rem auto;
+  text-align: center;
+  border: var(--border-width-main) solid var(--color-text-primary);
+  border-radius: 20px;
+  box-shadow: var(--box-shadow-main);
+}
+
+.home-hero__title {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-inverse);
+  text-shadow: 4px 4px 0 var(--color-text-primary);
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 350px;
+  margin: 0 auto;
+}

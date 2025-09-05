@@ -1,0 +1,61 @@
+/* src/css/pages/_puzzles.css */
+
+.puzzle-list {
+  display: grid;
+  grid-template-columns: 1fr; /* Una columna en mobile */
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* A partir de 600px, mostramos dos columnas */
+@media (min-width: 600px) {
+  .puzzle-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Bloque: Tarjeta de Puzzle */
+.puzzle-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primary); /* Color naranja/durazno */
+  border: var(--border-width-main) solid var(--color-text-primary);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-main);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+}
+
+.puzzle-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.puzzle-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.puzzle-card__title {
+  font-size: 1.5rem;
+}
+
+.puzzle-card__type {
+  background-color: var(--color-surface);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  border: 2px solid var(--color-text-primary);
+}
+
+.puzzle-card__description {
+  font-size: 1rem;
+  flex-grow: 1; /* Para que todas las tarjetas tengan la misma altura */
+}

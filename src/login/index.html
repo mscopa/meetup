@@ -1,58 +1,53 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MeetUp | Acceso</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
 
   <body>
-    <header class="divider" id="header"></header>
-    <main class="divider">
-      <picture>
-        <source media="(min-width: 800px)" srcset="/images/login/welcome.png" />
-        <source
-          media="(min-width: 400px)"
-          srcset="/images/login/welcome-medium.png"
-        />
-        <source
-          media="(max-width: 399px)"
-          srcset="/images/login/welcome-small.png"
-        />
-      </picture>
+    <header id="header"></header>
+
+    <main>
       <img
-        src="/images/login/super-meetup2025.png"
+        src="../assets/images/login/super-meetup2025.png"
         alt="Bienvenidos al Super MeetUp 2025"
+        class="login-header__img"
       />
-      <div class="login-container">
-        <h1 class="login-container__title">Iniciar Sesión</h1>
+      <div class="card login-card">
+        <h1 class="login-form__title">Iniciar Sesión</h1>
 
         <form class="login-form" id="login-form">
-          <div class="login-form__field">
-            <label for="email" class="login-form__label"
-              >Correo Electrónico</label
-            >
-            <input type="email" id="email" class="login-form__input" required />
+          <div class="form-field">
+            <label for="username" class="form-field__label">Usuario</label>
+            <input
+              type="text"
+              id="username"
+              class="form-field__input"
+              required
+            />
           </div>
-
-          <div class="login-form__field">
-            <label for="password" class="login-form__label">Contraseña</label>
+          <div class="form-field">
+            <label for="password" class="form-field__label">Contraseña</label>
             <input
               type="password"
               id="password"
-              class="login-form__input"
+              class="form-field__input"
               required
             />
           </div>
 
-          <button type="submit" class="login-form__button">Ingresar</button>
-        </form>
+          <p id="error-message" class="login-container__message"></p>
 
-        <div id="login-message" class="login-container__message"></div>
+          <button type="submit" class="btn btn--primary">Ingresar</button>
+        </form>
       </div>
     </main>
+
     <footer id="footer"></footer>
-    <script src="/js/login.js" type="module"></script>
+
+    <script src="/js/main.js" type="module"></script>
   </body>
 </html>

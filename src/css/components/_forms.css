@@ -1,0 +1,26 @@
+/* src/css/components/_forms.css */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-field__label {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.form-field__input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  font-family: var(--font-family-main);
+  border: 2px solid var(--color-text-primary);
+  border-radius: 5px;
+  background-color: var(--color-background-input);
+}
+
+.form-field__input:focus {
+  outline: 3px solid var(--color-primary);
+  background-color: var(--color-surface);
+}

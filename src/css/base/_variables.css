@@ -1,0 +1,22 @@
+/* src/css/base/_variables.css */
+:root {
+  /* Paleta de Colores */
+  --color-primary: #dd9457; /* Naranja/durazno del botón y la estrella */
+  --color-secondary: #d13728; /* Rojo del hongo */
+  --color-surface: #ffffff; /* Blanco de los contenedores y botones */
+  --color-text-primary: #000000; /* Negro para textos y bordes */
+  --color-text-inverse: #ffffff; /* Texto sobre fondos oscuros */
+  --color-background-input: #d0d0d0; /* Gris claro de los inputs */
+
+  /* Tipografía */
+  --font-family-main: "Super Mario Bros. NES", sans-serif;
+  --font-size-base: 18px;
+  --font-size-md: 1.2rem;
+  --font-size-lg: 1.8rem;
+  --font-size-xl: 2.5rem;
+
+  /* Otros */
+  --border-width-main: 4px;
+  --box-shadow-main: 8px 8px 0 0 rgba(0, 0, 0, 0.75);
+  --box-shadow-hover: 10px 10px 0 0 rgba(0, 0, 0, 0.75);
+}

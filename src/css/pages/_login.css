@@ -1,0 +1,24 @@
+/* src/css/pages/_login.css */
+.login-header {
+  margin-bottom: 2rem;
+}
+
+.login-header__img {
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.login-form__title {
+  font-size: var(--font-size-xl);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}

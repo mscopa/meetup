@@ -1,0 +1,90 @@
+/* src/css/pages/_wordsearch.css */
+
+.wordsearch-layout {
+  display: flex;
+  flex-direction: column; /* Grid arriba, palabras abajo en mobile */
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* Contenedor relativo para la grilla y el lienzo de las tuberías */
+.wordsearch-grid-wrapper {
+  position: relative;
+}
+
+.wordsearch-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 20), 1fr);
+  gap: 2px;
+  background-color: var(--color-background-input);
+  border: var(--border-width-main) solid var(--color-text-primary);
+}
+
+.wordsearch-grid__cell {
+  /* Reutilizamos la clase de celda, pero con estilos más simples */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-family-main);
+  font-size: clamp(0.7rem, 2vw, 1.2rem);
+  background-color: var(--color-surface);
+  user-select: none; /* Para que no se seleccione el texto al arrastrar */
+}
+
+/* Modificador para la celda mientras se está seleccionando */
+.wordsearch-grid__cell--selected {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* El lienzo SVG para dibujar las tuberías */
+.pipe-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Para que los clics atraviesen el lienzo */
+}
+
+.pipe-line {
+  stroke: #2e7d32; /* Verde tubería */
+  stroke-width: 18; /* Grosor de la tubería */
+  stroke-linecap: round; /* Bordes redondeados */
+  opacity: 0.7;
+}
+
+/* La lista de palabras a encontrar */
+.word-list {
+  background-color: var(--color-surface);
+  padding: 1.5rem;
+  border: var(--border-width-main) solid var(--color-text-primary);
+  border-radius: 8px;
+  list-style: none;
+}
+.word-list__item {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s;
+}
+.word-list__item--found {
+  text-decoration: line-through;
+  opacity: 0.6;
+  color: #2e7d32;
+}
+
+/* Layout para pantallas más grandes */
+@media (min-width: 768px) {
+  .wordsearch-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .wordsearch-grid-wrapper {
+    flex: 2;
+  }
+  .word-list {
+    flex: 1;
+    column-count: 2; /* Dividimos la lista en 2 columnas */
+  }
+}
