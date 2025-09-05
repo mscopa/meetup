@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import { resolve, relative } from "path";
 import { globSync } from "glob";
 
+// Esto está perfecto para manejar tus múltiples HTML, no lo toques.
 const htmlFiles = globSync("src/**/*.html", {
   ignore: "src/**/partials/**",
 });
@@ -13,7 +14,7 @@ const rollupInputs = htmlFiles.reduce((acc, file) => {
   return acc;
 }, {});
 
-// Plugin para manejar rutas dinámicas (ESTE LO DEJÁS COMO ESTÁ)
+// Tu plugin para rutas dinámicas, dejalo como está.
 const dynamicRoutesPlugin = () => ({
   name: "dynamic-routes",
   configureServer(server) {
@@ -29,7 +30,13 @@ const dynamicRoutesPlugin = () => ({
 });
 
 export default defineConfig({
+  // 1. Le decimos a Vite que la raíz de nuestro código fuente es 'src'.
   root: "src/",
+  
+  // 2. NO especificamos publicDir. Vite lo encontrará solo en 'src/public'.
+  //    Esta es la corrección más importante.
+
+  // 3. La configuración de 'build' está bien.
   build: {
     outDir: "../dist",
     emptyOutDir: true,
@@ -37,6 +44,10 @@ export default defineConfig({
       input: rollupInputs,
     },
   },
+
+  // 4. Mantenemos tu plugin.
   plugins: [dynamicRoutesPlugin()],
+  
+  // 5. La base en '/' es perfecta para Netlify y rutas absolutas.
   base: '/', 
 });
