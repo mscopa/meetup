@@ -29,8 +29,6 @@ const dynamicRoutesPlugin = () => ({
 });
 
 export default defineConfig({
-  // Directorio público. Vite lo busca por defecto, pero es bueno ser explícito.
-  publicDir: "../public",
   root: "src/",
   build: {
     outDir: "../dist",
@@ -39,9 +37,6 @@ export default defineConfig({
       input: rollupInputs,
     },
   },
-  plugins: [dynamicRoutesPlugin()], // Sacamos el copyImagesPlugin
-  
-  // Es mejor usar la base por defecto ('/') si usás rutas absolutas.
-  // Netlify funciona perfecto con esto.
+  plugins: [dynamicRoutesPlugin()],
   base: '/', 
 });
