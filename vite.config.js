@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from "vite";
 import { resolve, relative } from "path";
 import { globSync } from "glob";
@@ -12,35 +13,7 @@ const rollupInputs = htmlFiles.reduce((acc, file) => {
   return acc;
 }, {});
 
-// Plugin para copiar imágenes estáticas
-const copyImagesPlugin = () => ({
-  name: "copy-images",
-  closeBundle() {
-    const fs = require("fs");
-    const path = require("path");
-    
-    const srcDir = path.resolve(__dirname, "src/assets/images");
-    const destDir = path.resolve(__dirname, "dist/assets/images");
-    
-    if (!fs.existsSync(destDir)) {
-      fs.mkdirSync(destDir, { recursive: true });
-    }
-    
-    if (fs.existsSync(srcDir)) {
-      const files = fs.readdirSync(srcDir);
-      files.forEach(file => {
-        const srcPath = path.join(srcDir, file);
-        const destPath = path.join(destDir, file);
-        
-        if (fs.statSync(srcPath).isFile()) {
-          fs.copyFileSync(srcPath, destPath);
-        }
-      });
-      console.log("Imágenes copiadas correctamente");
-    }
-  },
-});
-
+// Plugin para manejar rutas dinámicas (ESTE LO DEJÁS COMO ESTÁ)
 const dynamicRoutesPlugin = () => ({
   name: "dynamic-routes",
   configureServer(server) {
@@ -56,6 +29,8 @@ const dynamicRoutesPlugin = () => ({
 });
 
 export default defineConfig({
+  // Directorio público. Vite lo busca por defecto, pero es bueno ser explícito.
+  publicDir: "../public",
   root: "src/",
   build: {
     outDir: "../dist",
@@ -63,9 +38,10 @@ export default defineConfig({
     rollupOptions: {
       input: rollupInputs,
     },
-    assetsInclude: ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.webp", "**/*.gif"],
   },
-  plugins: [copyImagesPlugin(), dynamicRoutesPlugin()],
-  // Configuración importante para Netlify
-  base: process.env.NODE_ENV === 'production' ? './' : '/',
+  plugins: [dynamicRoutesPlugin()], // Sacamos el copyImagesPlugin
+  
+  // Es mejor usar la base por defecto ('/') si usás rutas absolutas.
+  // Netlify funciona perfecto con esto.
+  base: '/', 
 });
