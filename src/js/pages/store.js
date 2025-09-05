@@ -56,7 +56,7 @@ function createProductCard(product, canPurchase) {
       <h2 class="product-card__name">${product.name}</h2>
       <div class="product-card__info">
         <span class="product-card__price">
-          <img src="/assets/images/mario-coin.png" alt="Moneda">
+          <img src="../assets/images/mario-coin.png" alt="Moneda">
           x${product.price}
         </span>
         <span class="product-card__stock">Stock: ${product.stock}</span>
