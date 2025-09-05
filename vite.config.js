@@ -1,4 +1,3 @@
-// vite.config.js
 import { defineConfig } from "vite";
 import { resolve, relative } from "path";
 import { globSync } from "glob";
@@ -20,23 +19,19 @@ const copyImagesPlugin = () => ({
     const fs = require("fs");
     const path = require("path");
     
-    // Directorio de origen y destino
     const srcDir = path.resolve(__dirname, "src/assets/images");
     const destDir = path.resolve(__dirname, "dist/assets/images");
     
-    // Crear directorio destino si no existe
     if (!fs.existsSync(destDir)) {
       fs.mkdirSync(destDir, { recursive: true });
     }
     
-    // Copiar archivos
     if (fs.existsSync(srcDir)) {
       const files = fs.readdirSync(srcDir);
       files.forEach(file => {
         const srcPath = path.join(srcDir, file);
         const destPath = path.join(destDir, file);
         
-        // Solo copiar si es un archivo
         if (fs.statSync(srcPath).isFile()) {
           fs.copyFileSync(srcPath, destPath);
         }
@@ -46,7 +41,6 @@ const copyImagesPlugin = () => ({
   },
 });
 
-// Plugin para manejar rutas dinámicas
 const dynamicRoutesPlugin = () => ({
   name: "dynamic-routes",
   configureServer(server) {
@@ -69,10 +63,9 @@ export default defineConfig({
     rollupOptions: {
       input: rollupInputs,
     },
-    // Añadir esta opción para assets
     assetsInclude: ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.webp", "**/*.gif"],
   },
   plugins: [copyImagesPlugin(), dynamicRoutesPlugin()],
-  // Configuración importante para rutas base
-  base: './',
+  // Configuración importante para Netlify
+  base: process.env.NODE_ENV === 'production' ? './' : '/',
 });
