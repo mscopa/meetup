@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const publicRoutes = ["/login/", "/register/"];
 
   const currentPath = window.location.pathname;
-  console.log(currentPath);
   if (!publicRoutes.includes(currentPath) && !AuthState.isAuthenticated()) {
     window.location.href = "/login/";
     return;

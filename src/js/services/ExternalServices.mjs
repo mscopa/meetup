@@ -136,6 +136,10 @@ class ExternalServices {
     return this.request(`/puzzles/${id}`);
   }
 
+  togglePuzzleStatus(puzzleId, isEnabled) {
+    const payload = { is_enabled: isEnabled };
+    return this.request(`/puzzles/${puzzleId}/toggle-status`, 'PATCH', payload);
+  }
 
   identifyCounselor(pin) {
     return this.request('/counselor/identify', 'POST', { pin });
