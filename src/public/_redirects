@@ -1,0 +1,9 @@
+# Reglas de reescritura para rutas dinámicas
+
+# Regla para las compañías: cualquier URL como /companies/1, /companies/25, etc.
+# debe servir el archivo /companies/index.html sin cambiar la URL.
+/companies/:id    /companies/index.html    200
+
+# Regla para los puzzles: cualquier URL como /puzzles/1, /puzzles/5, etc.
+# debe servir el archivo /puzzles/play.html sin cambiar la URL.
+/puzzles/:id      /puzzles/play.html       200

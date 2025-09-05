@@ -32,7 +32,7 @@ const dynamicRoutesPlugin = () => ({
 export default defineConfig({
   // 1. Le decimos a Vite que la raíz de nuestro código fuente es 'src'.
   root: "src/",
-  
+
   // 2. NO especificamos publicDir. Vite lo encontrará solo en 'src/public'.
   //    Esta es la corrección más importante.
 
@@ -47,7 +47,7 @@ export default defineConfig({
 
   // 4. Mantenemos tu plugin.
   plugins: [dynamicRoutesPlugin()],
-  
+
   // 5. La base en '/' es perfecta para Netlify y rutas absolutas.
-  base: '/', 
+  base: "/",
 });

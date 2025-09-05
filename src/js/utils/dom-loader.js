@@ -1,7 +1,7 @@
 import { select } from "./helpers.js";
 import ExternalServices from "../services/ExternalServices.mjs";
 import AuthState from "../services/AuthState.mjs";
-import { showModal, hideModal } from './modal.js';
+import { showModal, hideModal } from "./modal.js";
 
 /**
  * Carga contenido HTML desde un archivo y lo inserta en un contenedor.
@@ -77,19 +77,19 @@ export async function loadHeader() {
       document.body.dataset.userCoins = company.coins;
 
       // Funcionalidad de Logout
-      const logoutButton = select('#logout-button');
+      const logoutButton = select("#logout-button");
       if (logoutButton) {
-        logoutButton.addEventListener('click', async (e) => {
+        logoutButton.addEventListener("click", async (e) => {
           e.preventDefault();
           try {
             await ExternalServices.logout();
-            alert('Sesión cerrada correctamente.');
+            alert("Sesión cerrada correctamente.");
           } catch (error) {
-            console.error('Error al cerrar sesión en el servidor:', error);
+            console.error("Error al cerrar sesión en el servidor:", error);
             // Aún si falla la API, forzamos el logout en el frontend
           } finally {
             AuthState.clear();
-            window.location.href = '/login/';
+            window.location.href = "/login/";
           }
         });
       }
@@ -105,18 +105,21 @@ export async function loadHeader() {
 
     if (announcements && announcements.length > 0) {
       const latestId = announcements[0].id; // El endpoint devuelve los más nuevos primero
-      const lastReadId = localStorage.getItem('lastReadAnnouncementId');
+      const lastReadId = localStorage.getItem("lastReadAnnouncementId");
 
       if (latestId > lastReadId) {
         // Hay un anuncio nuevo que no hemos visto
-        const notificationDot = select('.notification-dot');
+        const notificationDot = select(".notification-dot");
         if (notificationDot) {
-          notificationDot.classList.remove('hidden');
+          notificationDot.classList.remove("hidden");
         }
       }
     }
   } catch (error) {
-    console.error("No se pudieron cargar los anuncios para las notificaciones:", error);
+    console.error(
+      "No se pudieron cargar los anuncios para las notificaciones:",
+      error,
+    );
   }
 }
 
@@ -125,13 +128,13 @@ export async function loadHeader() {
  */
 export async function loadFooter() {
   await loadHTML("/partials/footer.html", "footer");
-  
+
   const counselorLoginLink = select("#counselor-login-link");
 
   if (counselorLoginLink) {
     counselorLoginLink.addEventListener("click", (e) => {
       e.preventDefault();
-      
+
       const formHtml = `
         <form id="pin-form" class="modal-form">
           <div class="form-field">
@@ -141,7 +144,7 @@ export async function loadFooter() {
           <button type="submit" class="btn btn--primary">Identificarse</button>
         </form>
       `;
-      
+
       // Llamamos a showModal y le pasamos una función callback
       showModal("Identificación de Consejero", formHtml, () => {
         // Este código solo se ejecuta DESPUÉS de que el formulario esté en el DOM.
@@ -155,12 +158,18 @@ export async function loadFooter() {
               AuthState.setToken(response.token);
               hideModal();
               // Usamos un modal de éxito en lugar de alert
-              showModal('¡Éxito!', `<p>¡Hola, ${response.counselor_name}!</p><p>La página se recargará para aplicar tus nuevos permisos.</p>`);
+              showModal(
+                "¡Éxito!",
+                `<p>¡Hola, ${response.counselor_name}!</p><p>La página se recargará para aplicar tus nuevos permisos.</p>`,
+              );
               setTimeout(() => window.location.reload(), 2000); // Recargamos después de 2 segundos
             } catch (error) {
               // También podemos mostrar el error en un modal
               hideModal();
-              showModal('Error', '<p>El PIN ingresado es incorrecto. Por favor, intentá de nuevo.</p>');
+              showModal(
+                "Error",
+                "<p>El PIN ingresado es incorrecto. Por favor, intentá de nuevo.</p>",
+              );
             }
           });
         }
