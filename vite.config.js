@@ -13,22 +13,50 @@ const rollupInputs = htmlFiles.reduce((acc, file) => {
   return acc;
 }, {});
 
-// Plugin para manejar rutas dinámicas como /companies/1 o /puzzles/1
+// Plugin para copiar imágenes estáticas
+const copyImagesPlugin = () => ({
+  name: "copy-images",
+  closeBundle() {
+    const fs = require("fs");
+    const path = require("path");
+    
+    // Directorio de origen y destino
+    const srcDir = path.resolve(__dirname, "src/assets/images");
+    const destDir = path.resolve(__dirname, "dist/assets/images");
+    
+    // Crear directorio destino si no existe
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+    }
+    
+    // Copiar archivos
+    if (fs.existsSync(srcDir)) {
+      const files = fs.readdirSync(srcDir);
+      files.forEach(file => {
+        const srcPath = path.join(srcDir, file);
+        const destPath = path.join(destDir, file);
+        
+        // Solo copiar si es un archivo
+        if (fs.statSync(srcPath).isFile()) {
+          fs.copyFileSync(srcPath, destPath);
+        }
+      });
+      console.log("Imágenes copiadas correctamente");
+    }
+  },
+});
+
+// Plugin para manejar rutas dinámicas
 const dynamicRoutesPlugin = () => ({
   name: "dynamic-routes",
   configureServer(server) {
     server.middlewares.use((req, res, next) => {
-      // La regla que busca /companies/{id} O /puzzles/{id}
       if (/^\/(companies|puzzles)\/\d+(\/)?$/.test(req.url)) {
-        const section = req.url.split("/")[1]; // 'companies' o 'puzzles'
-
-        // Si es 'puzzles', el archivo es 'play.html'. Si es 'companies', es 'index.html'.
+        const section = req.url.split("/")[1];
         const targetHtml = section === "puzzles" ? "play.html" : "index.html";
-
-        // Re-escribimos la URL para que Vite sirva el archivo correcto.
         req.url = `/${section}/${targetHtml}`;
       }
-      next(); // Importante: dejamos que la petición continúe.
+      next();
     });
   },
 });
@@ -41,6 +69,10 @@ export default defineConfig({
     rollupOptions: {
       input: rollupInputs,
     },
+    // Añadir esta opción para assets
+    assetsInclude: ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.webp", "**/*.gif"],
   },
-  plugins: [dynamicRoutesPlugin()], // Asegúrate de que el plugin esté aquí.
+  plugins: [copyImagesPlugin(), dynamicRoutesPlugin()],
+  // Configuración importante para rutas base
+  base: './',
 });
