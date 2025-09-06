@@ -11,6 +11,36 @@
 
     <main class="main-container">
       <div id="company-info" class="company-info"></div>
+      <form
+        id="edit-company-form"
+        class="card hidden"
+        style="max-width: 600px; margin-top: 1rem"
+      >
+        <div class="form-field">
+          <label for="name-input" class="form-field__label"
+            >Nombre de Compañía</label
+          >
+          <input type="text" id="name-input" class="form-field__input" />
+        </div>
+        <div class="form-field">
+          <label for="war-cry-input" class="form-field__label"
+            >Grito de Guerra</label
+          >
+          <input type="text" id="war-cry-input" class="form-field__input" />
+        </div>
+        <div class="form-field">
+          <label for="room-input" class="form-field__label">Salón</label>
+          <input type="text" id="room-input" class="form-field__input" />
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem">
+          <button type="submit" class="btn btn--primary">
+            Guardar Cambios
+          </button>
+          <button type="button" id="cancel-edit-btn" class="btn btn--secondary">
+            Cancelar
+          </button>
+        </div>
+      </form>
 
       <h2 class="member-list__title">Miembros de la Compañía</h2>
 

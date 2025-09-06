@@ -92,6 +92,10 @@ class ExternalServices {
     return this.request('/announcements');
   }
 
+  createAnnouncement(title, message) {
+    return this.request('/announcements', 'POST', { title, message });
+  }
+
   getSelf() {
     return this.request('/me');
   }
@@ -105,6 +109,10 @@ class ExternalServices {
 
   getCompanyDetails(id) {
     return this.request(`/companies/${id}`);
+  }
+
+  updateCompany(companyId, data) {
+    return this.request(`/companies/${companyId}`, 'PATCH', data);
   }
 
   getProducts(url = '/products') {
@@ -124,6 +132,33 @@ class ExternalServices {
   getMyTransactions() {
     return this.request('/my-transactions');
   }
+
+  verifyTransaction(code) {
+    return this.request(`/transactions/verify/${code}`);
+  }
+  redeemTransaction(code) {
+    return this.request(`/transactions/redeem/${code}`, 'POST');
+  }
+  
+  getRanking() {
+    return this.request('/ranking');
+  }
+
+  getCheckinList() {
+    return this.request('/checkin/participants');
+  }
+
+  createParticipant(data) {
+  return this.request('/checkin/participants', 'POST', data);
+}
+
+  updateCheckinStatus(participantId, attended, kitDelivered) {
+    const payload = {
+      attended: attended,
+      kit_delivered: kitDelivered
+    };
+    return this.request(`/checkin/participants/${participantId}`, 'PATCH', payload);
+  }
   
   /**
    * Obtiene la lista de puzzles.
@@ -139,6 +174,16 @@ class ExternalServices {
   togglePuzzleStatus(puzzleId, isEnabled) {
     const payload = { is_enabled: isEnabled };
     return this.request(`/puzzles/${puzzleId}/toggle-status`, 'PATCH', payload);
+  }
+
+  getCompanyList() {
+    return this.request('/company-list');
+  }
+  getEarningsHistory(url = '/earnings') {
+    return this.request(url);
+  }
+  createEarning(data) {
+    return this.request('/earnings', 'POST', data);
   }
 
   identifyCounselor(pin) {

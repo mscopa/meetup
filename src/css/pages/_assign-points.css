@@ -1,0 +1,50 @@
+.assign-form {
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+.assign-form__row {
+  display: flex;
+  gap: 1rem;
+}
+.assign-form__row .form-field {
+  flex: 1;
+}
+
+.earnings-history {
+  width: 100%;
+  max-width: 700px;
+}
+.history-title {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-inverse);
+  text-shadow: 2px 2px 0 var(--color-text-primary);
+}
+.earning-item {
+  background-color: var(--color-surface);
+  border-left: 5px solid var(--color-secondary);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  box-shadow: var(--box-shadow-main);
+}
+.earning-item__reason {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.earning-item__meta {
+  font-size: 0.8rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+.earning-item__details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+.earning-item__value {
+  font-weight: bold;
+}

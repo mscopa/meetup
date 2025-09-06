@@ -59,24 +59,50 @@ class AuthState {
      */
     async hasAbility(ability) {
         if (!this.isAuthenticated()) {
-            return false;
+        return false;
         }
 
         let abilities = JSON.parse(sessionStorage.getItem(this.abilitiesKey));
 
-        if (!abilities) {
-            try {
-            const me = await ExternalServices.getSelf(); // Llamamos a /api/me
-            abilities = me.meta.abilities || [];
-            sessionStorage.setItem(this.abilitiesKey, JSON.stringify(abilities));
-            } catch (e) {
-            console.error("No se pudieron obtener los permisos del usuario", e);
-            return false;
-            }
+        // --- NUEVA VERIFICACIÓN DE SEGURIDAD ---
+        // Si lo que sacamos de sessionStorage no es un array, lo ignoramos.
+        if (!Array.isArray(abilities)) {
+        abilities = null; // Lo forzamos a null para que llame a la API.
         }
 
-        // El usuario tiene el permiso si está en la lista o si tiene el comodín "*"
+        if (!abilities) {
+        try {
+            const me = await ExternalServices.getSelf();
+            let apiAbilities = me.meta.abilities || [];
+            
+            // --- OTRA VERIFICACIÓN DE SEGURIDAD ---
+            // Nos aseguramos de que la respuesta de la API sea un array.
+            if (!Array.isArray(apiAbilities)) {
+                apiAbilities = [];
+            }
+            
+            abilities = apiAbilities;
+            sessionStorage.setItem(this.abilitiesKey, JSON.stringify(abilities));
+        } catch (e) {
+            console.error("No se pudieron obtener los permisos del usuario", e);
+            abilities = []; // En caso de error, devolvemos un array vacío.
+        }
+        }
+        
+        // Ahora estamos 100% seguros de que 'abilities' es un array.
         return abilities.includes(ability) || abilities.includes('*');
+    }
+
+    /**
+     * Verifica si el usuario logueado es un administrador.
+     * Lo hace revisando si el objeto de usuario guardado tiene la relación 'administrator'.
+     * @returns {boolean}
+     */
+    isAdmin() {
+        const user = this.getUser();
+        // El '?' es optional chaining: si user es null, no da error, solo devuelve undefined.
+        // El '!!' convierte el resultado en un booleano estricto (true/false).
+        return !!user?.administrator;
     }
 
     // No te olvides de modificar el método clear() para limpiar los permisos también

@@ -1,0 +1,61 @@
+/* src/css/pages/_ranking.css */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Bloque: Item del Ranking */
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-text-primary);
+  border-left-width: 8px;
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: var(--box-shadow-main);
+}
+
+.ranking-item__position {
+  font-size: 1rem;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+.ranking-item__icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.ranking-item__details {
+  flex-grow: 1;
+}
+
+.ranking-item__name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.ranking-item__stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* Modificadores para el Top 3 */
+.ranking-item--first {
+  border-color: #ffd700; /* Dorado */
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffd700;
+}
+.ranking-item--second {
+  border-color: #c0c0c0; /* Plata */
+}
+.ranking-item--third {
+  border-color: #cd7f32; /* Bronce */
+}

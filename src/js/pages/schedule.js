@@ -105,10 +105,11 @@ function formatTime(date) {
 // Función que genera el HTML para los detalles de una actividad
 function generateDetailsHTML(details) {
   if (!details || details.length === 0) {
-    return "<p>No hay detalles para esta actividad.</p>";
+    return "<div><p>No hay detalles para esta actividad.</p></div>";
   }
 
-  return details
+  // Envolvemos toda la salida en un único <div> para que el CSS Grid funcione
+  const innerHtml = details
     .map(
       (detail) => `
     <div class="detail-section">
@@ -120,6 +121,8 @@ function generateDetailsHTML(details) {
   `,
     )
     .join("");
+
+  return `<div>${innerHtml}</div>`;
 }
 
 // Función que añade el evento de click a cada item para el efecto acordeón

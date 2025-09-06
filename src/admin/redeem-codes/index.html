@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Canjes | Super Meetup</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+    <main class="main-container">
+      <h1 class="main-container__title">Control de Canjes</h1>
+
+      <form id="verify-form" class="card" style="max-width: 500px">
+        <div class="form-field">
+          <label for="code-input" class="form-field__label"
+            >Ingresar Código de Retiro</label
+          >
+          <input
+            type="text"
+            id="code-input"
+            class="form-field__input"
+            required
+            style="
+              text-transform: uppercase;
+              font-size: 1.5rem;
+              text-align: center;
+            "
+          />
+        </div>
+        <button type="submit" class="btn btn--primary">Verificar Código</button>
+      </form>
+
+      <div id="transaction-details" class="transaction-details hidden"></div>
+    </main>
+
+    <div class="modal-overlay hidden" id="app-modal-overlay">
+      <div class="modal" id="app-modal">
+        <div class="modal__header">
+          <h2 class="modal__title" id="modal-title"></h2>
+          <button class="modal__close-btn" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal__content" id="modal-content"></div>
+      </div>
+    </div>
+    <footer id="footer"></footer>
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

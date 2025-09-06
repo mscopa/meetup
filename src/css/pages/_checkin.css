@@ -1,0 +1,80 @@
+.search-bar {
+  display: flex;
+  flex-direction: column; /* En mobile, uno arriba del otro */
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* El input ahora es flexible */
+.search-bar__input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-family: var(--font-family-main);
+  border: 2px solid var(--color-text-primary);
+  border-radius: 5px;
+  flex-grow: 1; /* Le dice que ocupe todo el espacio disponible */
+}
+
+.participant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.participant-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border-radius: 5px;
+  box-shadow: var(--box-shadow-main);
+  transition: opacity 0.4s;
+}
+
+/* Modificador para cuando ya se hizo el check-in completo */
+.participant-card--checked-in {
+  opacity: 0.5;
+  background-color: #f0f0f0;
+}
+
+.participant-card__info {
+  flex-grow: 1;
+}
+.participant-card__name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.participant-card__company {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.participant-card__controls {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Estilo para los checkboxes */
+.checkbox-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+}
+.checkbox-control input {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .search-bar {
+    flex-direction: row;
+  }
+}

@@ -54,49 +54,71 @@ export async function loadHeader() {
   menuCloseBtn.addEventListener("click", closeMenu);
   overlay.addEventListener("click", closeMenu);
 
-  // 5. Cargar los datos dinámicos del usuario y ponerlos en el menú
-  try {
-    const response = await ExternalServices.getProfileHeader();
-    const { type, company } = response.data;
+  // Verificamos el tipo de usuario
+  if (AuthState.isAdmin()) {
+    // Es un administrador
+    const sideMenuContent = select(".side-menu__content");
 
-    if (type === "company" && company) {
-      // Poblar el menú lateral
-      select("#company-number").textContent = company.number;
-      select("#company-name").textContent = company.name;
-      select("#company-room").textContent = company.room;
-      select("#company-score").textContent = company.score;
-      select("#company-coins-value-menu").textContent = `x${company.coins}`;
-      select("#company-war-cry").textContent = `"${company.war_cry}"`;
+    // Ocultamos el div de la compañía y creamos el menú de admin
+    select("#company-header").classList.add("hidden");
 
-      // Poblar el indicador de monedas en el header
-      select("#header-coins-value").textContent = `x${company.coins}`;
-      select("#header-coin-display").classList.remove("hidden");
+    const adminMenuHtml = `
+      <div class="admin-menu-header">
+        <p><strong>Usuario:</strong> ${AuthState.getUser().administrator.first_name}</p>
+        <p><strong>Rol:</strong> ${AuthState.getUser().administrator.role}</p>
+      </div>
+      <a href="/admin/" class="btn btn--secondary">Panel de Admin</a>
+      <a href="#" id="logout-button" class="btn btn--primary">Salir</a>
+    `;
+    sideMenuContent.innerHTML = adminMenuHtml;
 
-      // Mostrar el contenedor de la compañía dentro del menú
-      select("#company-header").classList.remove("hidden");
-      document.body.dataset.userCoins = company.coins;
+    // Le damos funcionalidad al nuevo botón de Salir
+    addLogoutFunctionality();
+  } else if (AuthState.isAuthenticated()) {
+    // 5. Cargar los datos dinámicos del usuario y ponerlos en el menú
+    try {
+      const response = await ExternalServices.getProfileHeader();
+      const { type, company } = response.data;
 
-      // Funcionalidad de Logout
-      const logoutButton = select("#logout-button");
-      if (logoutButton) {
-        logoutButton.addEventListener("click", async (e) => {
-          e.preventDefault();
-          try {
-            await ExternalServices.logout();
-            alert("Sesión cerrada correctamente.");
-          } catch (error) {
-            console.error("Error al cerrar sesión en el servidor:", error);
-            // Aún si falla la API, forzamos el logout en el frontend
-          } finally {
-            AuthState.clear();
-            window.location.href = "/login/";
-          }
-        });
+      if (type === "company" && company) {
+        // Poblar el menú lateral
+        select("#company-number").textContent = company.number;
+        select("#company-name").textContent = company.name;
+        select("#company-room").textContent = company.room;
+        select("#company-score").textContent = company.score;
+        select("#company-coins-value-menu").textContent = `x${company.coins}`;
+        select("#company-war-cry").textContent = `"${company.war_cry}"`;
+
+        // Poblar el indicador de monedas en el header
+        select("#header-coins-value").textContent = `x${company.coins}`;
+        select("#header-coin-display").classList.remove("hidden");
+
+        // Mostrar el contenedor de la compañía dentro del menú
+        select("#company-header").classList.remove("hidden");
+        document.body.dataset.userCoins = company.coins;
+
+        // Funcionalidad de Logout
+        const logoutButton = select("#logout-button");
+        if (logoutButton) {
+          logoutButton.addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+              await ExternalServices.logout();
+              alert("Sesión cerrada correctamente.");
+            } catch (error) {
+              console.error("Error al cerrar sesión en el servidor:", error);
+              // Aún si falla la API, forzamos el logout en el frontend
+            } finally {
+              AuthState.clear();
+              window.location.href = "/login/";
+            }
+          });
+        }
       }
+      // ... aquí iría el 'else if' para el administrador
+    } catch (error) {
+      console.error("No se pudieron cargar los datos del header:", error);
     }
-    // ... aquí iría el 'else if' para el administrador
-  } catch (error) {
-    console.error("No se pudieron cargar los datos del header:", error);
   }
 
   try {
@@ -120,6 +142,24 @@ export async function loadHeader() {
       "No se pudieron cargar los anuncios para las notificaciones:",
       error,
     );
+  }
+}
+
+// Creamos una función reutilizable para el logout para no repetir código
+function addLogoutFunctionality() {
+  const logoutButton = select("#logout-button");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        await ExternalServices.logout();
+      } catch (error) {
+        console.error("Error al cerrar sesión en el servidor:", error);
+      } finally {
+        AuthState.clear();
+        window.location.href = "/login/";
+      }
+    });
   }
 }
 

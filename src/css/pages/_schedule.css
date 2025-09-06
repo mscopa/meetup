@@ -55,15 +55,16 @@
   flex-grow: 1; /* Ocupa el espacio restante */
 }
 
-/* Elemento: El contenido expandible */
 .schedule-item__details {
-  max-height: 0; /* Oculto por defecto */
+  display: grid; /* Convertimos el contenedor en una grilla */
+  grid-template-rows: 0fr; /* Lo colapsamos a cero filas de fracción */
+  transition: grid-template-rows 0.4s ease-out; /* Animamos el cambio de filas */
+  padding: 0 1.5rem;
+}
+
+/* El contenido directo del acordeón, para que la animación funcione */
+.schedule-item__details > div {
   overflow: hidden;
-  transition:
-    max-height 0.4s ease-out,
-    padding 0.4s ease-out; /* Animación suave */
-  padding: 0 1.5rem; /* Sin padding vertical cuando está cerrado */
-  border-top: 2px dashed var(--color-background-input);
 }
 
 .detail-section {
@@ -83,8 +84,9 @@
 
 /* Modificador: Cuando el item está activo/abierto */
 .schedule-item--active .schedule-item__details {
-  max-height: 2000px; /* Un valor alto para permitir que el contenido se expanda */
+  grid-template-rows: 1fr; /* Le decimos que crezca a 1 fracción (todo lo que necesite) */
   padding: 1.5rem;
+  border-top: 2px dashed var(--color-background-input);
 }
 
 /* Modificadores: Estados de la actividad */

@@ -1,0 +1,33 @@
+.transaction-details {
+  margin-top: 2rem;
+  max-width: 500px;
+}
+.transaction-details.hidden {
+  display: none;
+}
+.transaction-details__content {
+  font-size: 1.1rem;
+}
+.transaction-details__content p {
+  margin-bottom: 0.75rem;
+}
+.transaction-details__actions {
+  margin-top: 1.5rem;
+}
+
+/* Estilos para los diferentes estados del código */
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+}
+.status-badge--pending {
+  background-color: #f9a825;
+}
+.status-badge--retrieved {
+  background-color: #2e7d32;
+}
+.status-badge--not-found {
+  background-color: #c62828;
+}

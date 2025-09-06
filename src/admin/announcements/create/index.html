@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear Anuncio | Super Meetup</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+    <main class="main-container">
+      <h1 class="main-container__title">Crear Nuevo Anuncio</h1>
+
+      <form id="create-announcement-form" class="card" style="max-width: 600px">
+        <div class="form-field">
+          <label for="title" class="form-field__label">Título</label>
+          <input type="text" id="title" class="form-field__input" required />
+        </div>
+
+        <div class="form-field">
+          <label for="message" class="form-field__label">Mensaje</label>
+          <textarea
+            id="message"
+            class="form-field__input"
+            rows="6"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary" id="submit-btn">
+          Publicar Anuncio
+        </button>
+      </form>
+    </main>
+    <div class="modal-overlay hidden" id="app-modal-overlay">
+      <div class="modal" id="app-modal">
+        <div class="modal__header">
+          <h2 class="modal__title" id="modal-title"></h2>
+          <button class="modal__close-btn" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal__content" id="modal-content"></div>
+      </div>
+    </div>
+    <footer id="footer"></footer>
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

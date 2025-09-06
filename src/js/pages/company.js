@@ -1,8 +1,8 @@
 // src/js/pages/company.js
 import ExternalServices from "../services/ExternalServices.mjs";
 import AuthState from "../services/AuthState.mjs"; // <-- IMPORTANTE: Añadimos AuthState
-import { select } from "../utils/helpers.js";
-import { onDOMLoaded } from "../utils/helpers.js";
+import { select, onDOMLoaded } from "../utils/helpers.js";
+import { showModal } from "../utils/modal.js";
 
 async function initCompanyPage() {
   // YA NO LEEMOS LA URL. Obtenemos el usuario del estado.
@@ -23,6 +23,10 @@ async function initCompanyPage() {
     const response = await ExternalServices.getCompanyDetails(companyId);
     const companyData = response.data;
     renderCompanyInfo(companyData, companyInfoContainer);
+    if (await AuthState.hasAbility("purchase-products")) {
+      // Reutilizamos el permiso de consejero
+      addEditFunctionality(companyData, companyInfoContainer);
+    }
     renderMemberList(companyData, memberListContainer);
   } catch (error) {
     console.error("Error al cargar los detalles de la compañía:", error);
@@ -33,11 +37,77 @@ async function initCompanyPage() {
 function renderCompanyInfo(data, container) {
   container.innerHTML = `
     <h1 class="company-info__name">${data.name} (Nº ${data.number})</h1>
+    <p><em>"${data.war_cry}"</em></p>
     <div class="company-info__stats">
+      <span><strong>Salón:</strong> ${data.room}</span>
       <span><strong>Puntaje:</strong> ${data.score}</span>
       <span><strong>Monedas:</strong> ${data.coins}</span>
     </div>
+    <div id="edit-btn-container" style="margin-top: 1rem;"></div>
   `;
+}
+
+function addEditFunctionality(companyData, infoContainer) {
+  const editBtnContainer = select("#edit-btn-container");
+  const editForm = select("#edit-company-form");
+  const memberList = select(".member-list__title");
+
+  // Creamos y añadimos el botón de Editar
+  editBtnContainer.innerHTML = `<button id="edit-btn" class="btn btn--secondary">Editar Datos</button>`;
+
+  const editBtn = select("#edit-btn");
+  const cancelBtn = select("#cancel-edit-btn");
+
+  const nameInput = select("#name-input");
+  const warCryInput = select("#war-cry-input");
+  const roomInput = select("#room-input");
+
+  const showForm = () => {
+    // Rellenamos el form con los datos actuales
+    nameInput.value = companyData.name;
+    warCryInput.value = companyData.war_cry;
+    roomInput.value = companyData.room;
+
+    infoContainer.classList.add("hidden");
+    memberList.classList.add("hidden");
+    editForm.classList.remove("hidden");
+  };
+
+  const hideForm = () => {
+    infoContainer.classList.remove("hidden");
+    memberList.classList.remove("hidden");
+    editForm.classList.add("hidden");
+  };
+
+  editBtn.addEventListener("click", showForm);
+  cancelBtn.addEventListener("click", hideForm);
+
+  editForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const newData = {
+      name: nameInput.value,
+      war_cry: warCryInput.value,
+      room: roomInput.value,
+    };
+    try {
+      const updatedCompany = await ExternalServices.updateCompany(
+        companyData.id,
+        newData,
+      );
+      showModal(
+        "¡Éxito!",
+        "<p>Los datos de la compañía se actualizaron correctamente.</p>",
+      );
+      // Actualizamos los datos y la vista
+      Object.assign(companyData, updatedCompany.data);
+      renderCompanyInfo(companyData, infoContainer);
+      addEditFunctionality(companyData, infoContainer); // Re-añadimos el botón de editar
+      hideForm();
+      loadHeader(); // Para actualizar el nombre en el header
+    } catch (error) {
+      showModal("Error", "<p>No se pudieron actualizar los datos.</p>");
+    }
+  });
 }
 
 function renderMemberList(data, container) {

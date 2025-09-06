@@ -21,9 +21,14 @@
 @import url("./pages/_login.css");
 @import url("./pages/_home.css");
 @import url("./pages/_announcements.css");
+@import url("./pages/_admin.css");
+@import url("./pages/_checkin.css");
+@import url("./pages/_assign-points.css");
+@import url("./pages/_redeem.css");
 @import url("./pages/_schedule.css");
 @import url("./pages/_company.css");
 @import url("./pages/_store.css");
+@import url("./pages/_ranking.css");
 @import url("./pages/_puzzles.css");
 @import url("./pages/_crossword.css");
 @import url("./pages/_wordsearch.css");
