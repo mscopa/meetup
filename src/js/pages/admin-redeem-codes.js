@@ -64,7 +64,6 @@ async function handleRedemption(e) {
   try {
     const response = await ExternalServices.redeemTransaction(code);
     showModal("¡Éxito!", `<p>${response.message}</p>`);
-    // Volvemos a verificar el código para mostrar el estado "YA CANJEADO"
     const updatedTransaction = await ExternalServices.verifyTransaction(code);
     renderTransactionDetails(updatedTransaction);
   } catch (error) {

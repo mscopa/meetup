@@ -1,6 +1,4 @@
-/* src/css/base/_variables.css */
 :root {
-  /* Paleta de Colores */
   --color-primary: #dd9457; /* Naranja/durazno del botón y la estrella */
   --color-secondary: #d13728; /* Rojo del hongo */
   --color-surface: #ffffff; /* Blanco de los contenedores y botones */

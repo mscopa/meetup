@@ -3,12 +3,6 @@ import ExternalServices from "../services/ExternalServices.mjs";
 import AuthState from "../services/AuthState.mjs";
 import { showModal, hideModal } from "./modal.js";
 
-/**
- * Carga contenido HTML desde un archivo y lo inserta en un contenedor.
- * @param {string} url - La ruta al archivo .html (ej: '/src/views/partials/header.html').
- * @param {string} containerSelector - El selector del elemento donde se insertará el HTML.
- * @returns {Promise<void>}
- */
 async function loadHTML(url, containerSelector) {
   const container = select(containerSelector);
   if (!container) {
@@ -25,20 +19,14 @@ async function loadHTML(url, containerSelector) {
   }
 }
 
-/**
- * Carga el header y lo llena con datos del perfil.
- */
 export async function loadHeader() {
-  // 1. Cargar el HTML del header y el menú lateral
   await loadHTML("/partials/header.html", "header");
 
-  // 2. Seleccionar los elementos del DOM que controlarán el menú
   const menuToggleBtn = select("#menu-toggle-btn");
   const menuCloseBtn = select("#menu-close-btn");
   const sideMenu = select("#side-menu");
   const overlay = select("#overlay");
 
-  // 3. Crear funciones para abrir y cerrar el menú
   const openMenu = () => {
     sideMenu.classList.add("side-menu--open");
     overlay.classList.remove("hidden");
@@ -49,17 +37,13 @@ export async function loadHeader() {
     overlay.classList.add("hidden");
   };
 
-  // 4. Asignar los eventos a los botones y al overlay
   menuToggleBtn.addEventListener("click", openMenu);
   menuCloseBtn.addEventListener("click", closeMenu);
   overlay.addEventListener("click", closeMenu);
 
-  // Verificamos el tipo de usuario
   if (AuthState.isAdmin()) {
-    // Es un administrador
     const sideMenuContent = select(".side-menu__content");
 
-    // Ocultamos el div de la compañía y creamos el menú de admin
     select("#company-header").classList.add("hidden");
 
     const adminMenuHtml = `
@@ -72,16 +56,13 @@ export async function loadHeader() {
     `;
     sideMenuContent.innerHTML = adminMenuHtml;
 
-    // Le damos funcionalidad al nuevo botón de Salir
     addLogoutFunctionality();
   } else if (AuthState.isAuthenticated()) {
-    // 5. Cargar los datos dinámicos del usuario y ponerlos en el menú
     try {
       const response = await ExternalServices.getProfileHeader();
       const { type, company } = response.data;
 
       if (type === "company" && company) {
-        // Poblar el menú lateral
         select("#company-number").textContent = company.number;
         select("#company-name").textContent = company.name;
         select("#company-room").textContent = company.room;
@@ -89,15 +70,12 @@ export async function loadHeader() {
         select("#company-coins-value-menu").textContent = `x${company.coins}`;
         select("#company-war-cry").textContent = `"${company.war_cry}"`;
 
-        // Poblar el indicador de monedas en el header
         select("#header-coins-value").textContent = `x${company.coins}`;
         select("#header-coin-display").classList.remove("hidden");
 
-        // Mostrar el contenedor de la compañía dentro del menú
         select("#company-header").classList.remove("hidden");
         document.body.dataset.userCoins = company.coins;
 
-        // Funcionalidad de Logout
         const logoutButton = select("#logout-button");
         if (logoutButton) {
           logoutButton.addEventListener("click", async (e) => {
@@ -107,7 +85,6 @@ export async function loadHeader() {
               alert("Sesión cerrada correctamente.");
             } catch (error) {
               console.error("Error al cerrar sesión en el servidor:", error);
-              // Aún si falla la API, forzamos el logout en el frontend
             } finally {
               AuthState.clear();
               window.location.href = "/login/";
@@ -115,7 +92,6 @@ export async function loadHeader() {
           });
         }
       }
-      // ... aquí iría el 'else if' para el administrador
     } catch (error) {
       console.error("No se pudieron cargar los datos del header:", error);
     }
@@ -123,14 +99,13 @@ export async function loadHeader() {
 
   try {
     const response = await ExternalServices.getAnnouncements();
-    const announcements = response.data; // Asumiendo que la respuesta es el array directamente
+    const announcements = response.data;
 
     if (announcements && announcements.length > 0) {
-      const latestId = announcements[0].id; // El endpoint devuelve los más nuevos primero
+      const latestId = announcements[0].id;
       const lastReadId = localStorage.getItem("lastReadAnnouncementId");
 
       if (latestId > lastReadId) {
-        // Hay un anuncio nuevo que no hemos visto
         const notificationDot = select(".notification-dot");
         if (notificationDot) {
           notificationDot.classList.remove("hidden");
@@ -145,7 +120,6 @@ export async function loadHeader() {
   }
 }
 
-// Creamos una función reutilizable para el logout para no repetir código
 function addLogoutFunctionality() {
   const logoutButton = select("#logout-button");
   if (logoutButton) {
@@ -163,9 +137,6 @@ function addLogoutFunctionality() {
   }
 }
 
-/**
- * Carga el footer.
- */
 export async function loadFooter() {
   await loadHTML("/partials/footer.html", "footer");
 
@@ -185,9 +156,7 @@ export async function loadFooter() {
         </form>
       `;
 
-      // Llamamos a showModal y le pasamos una función callback
       showModal("Identificación de Consejero", formHtml, () => {
-        // Este código solo se ejecuta DESPUÉS de que el formulario esté en el DOM.
         const pinForm = select("#pin-form");
         if (pinForm) {
           pinForm.addEventListener("submit", async (e) => {
@@ -197,14 +166,12 @@ export async function loadFooter() {
               const response = await ExternalServices.identifyCounselor(pin);
               AuthState.setToken(response.token);
               hideModal();
-              // Usamos un modal de éxito en lugar de alert
               showModal(
                 "¡Éxito!",
                 `<p>¡Hola, ${response.counselor_name}!</p><p>La página se recargará para aplicar tus nuevos permisos.</p>`,
               );
-              setTimeout(() => window.location.reload(), 2000); // Recargamos después de 2 segundos
+              setTimeout(() => window.location.reload(), 2000);
             } catch (error) {
-              // También podemos mostrar el error en un modal
               hideModal();
               showModal(
                 "Error",

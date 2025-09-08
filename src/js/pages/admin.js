@@ -2,7 +2,6 @@
 import AuthState from "../services/AuthState.mjs";
 import { select, onDOMLoaded } from "../utils/helpers.js";
 
-// Definimos todos los botones posibles del panel de admin
 const adminMenuItems = [
   {
     label: "Check-in de Participantes",
@@ -30,15 +29,13 @@ async function initAdminPage() {
   const menuContainer = select(".admin-menu");
   if (!menuContainer) return;
 
-  menuContainer.innerHTML = ""; // Limpiamos el contenedor
+  menuContainer.innerHTML = "";
 
-  // Recorremos la lista de botones y verificamos si tenemos permiso para cada uno
   for (const item of adminMenuItems) {
     if (await AuthState.hasAbility(item.ability)) {
-      // Si tenemos permiso, creamos el botón y lo añadimos
       const button = document.createElement("a");
       button.href = item.href;
-      button.className = "btn btn--secondary"; // Reutilizamos nuestro estilo de botón
+      button.className = "btn btn--secondary";
       button.textContent = item.label;
       menuContainer.appendChild(button);
     }

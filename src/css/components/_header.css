@@ -1,10 +1,7 @@
-/* src/css/components/_header.css */
-
 .hidden {
   display: none !important;
 }
 
-/* Header principal (ahora más simple) */
 .main-header {
   display: flex;
   justify-content: space-between;
@@ -12,9 +9,9 @@
   padding: 10px 15px;
   background-color: var(--color-surface);
   border-bottom: var(--border-width-main) solid var(--color-text-primary);
-  position: sticky; /* Lo hacemos fijo arriba */
+  position: sticky;
   top: 0;
-  z-index: 1000; /* Para que esté por encima de todo */
+  z-index: 1000;
 }
 
 .main-header__icon img {
@@ -28,19 +25,17 @@
   text-decoration: none;
 }
 
-/* El punto de notificación */
 .notification-dot {
   position: absolute;
   top: 2px;
   right: 2px;
   width: 12px;
   height: 12px;
-  background-color: #e53935; /* Rojo fuerte */
+  background-color: #e53935;
   border-radius: 50%;
-  border: 2px solid var(--color-surface); /* Borde blanco para que resalte */
+  border: 2px solid var(--color-surface);
 }
 
-/* Indicador de monedas en el header */
 .company-header__coins {
   display: flex;
   align-items: center;
@@ -55,26 +50,24 @@
   font-weight: bold;
 }
 
-/* El menú lateral (Side Menu) */
 .side-menu {
   position: fixed;
   top: 0;
   left: 0;
-  width: 280px; /* Ancho del menú */
+  width: 280px;
   height: 100%;
   background-color: var(--color-surface);
   border-right: var(--border-width-main) solid var(--color-text-primary);
   box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
-  transform: translateX(-100%); /* Oculto a la izquierda */
-  transition: transform 0.3s ease-in-out; /* Animación de deslizamiento */
-  z-index: 1001; /* Por encima del header y el overlay */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
 }
 
-/* Modificador para mostrar el menú */
 .side-menu--open {
-  transform: translateX(0); /* Lo trae a la vista */
+  transform: translateX(0);
 }
 
 .side-menu__header {
@@ -104,7 +97,6 @@
   margin-top: 2rem;
 }
 
-/* El overlay para el fondo */
 .overlay {
   position: fixed;
   top: 0;
@@ -112,5 +104,5 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999; /* Debajo del menú pero encima del contenido */
+  z-index: 999;
 }

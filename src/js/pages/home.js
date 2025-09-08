@@ -7,9 +7,8 @@ function setupHomePage() {
   const user = AuthState.getUser();
 
   if (companyLink) {
-    companyLink.href = "/company/"; // Enlace simple y directo
+    companyLink.href = "/company/";
   }
 }
 
-// Ejecutamos la función
 setupHomePage();

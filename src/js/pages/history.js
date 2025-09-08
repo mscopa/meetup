@@ -6,9 +6,7 @@ async function initHistoryPage() {
   try {
     const response = await ExternalServices.getMyTransactions();
     const transactions = response.data;
-    // ... lógica para renderizar cada transacción con su código y estado
   } catch (error) {
-    /* ... */
   }
 }
 onDOMLoaded(initHistoryPage);

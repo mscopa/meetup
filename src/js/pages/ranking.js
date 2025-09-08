@@ -14,7 +14,7 @@ async function initRankingPage() {
 
     container.innerHTML = companies
       .map((company, index) => {
-        const position = index + 1; // El index es 0, la posición es 1
+        const position = index + 1;
         return createRankingItem(company, position);
       })
       .join("");
@@ -28,13 +28,11 @@ function createRankingItem(company, position) {
   let positionHtml = `<div class="ranking-item__position">#${position}</div>`;
   let modifierClass = "";
 
-  // Iconos y estilos especiales para el Top 3
   if (position === 1) {
     modifierClass = "ranking-item--first";
     positionHtml = `<div class="ranking-item__icon"><img src="/assets/images/first-place-icon.png" alt="1er Puesto"></div>`;
   } else if (position === 2) {
     modifierClass = "ranking-item--second";
-    // Para el 2do puesto, podríamos usar una moneda plateada o un hongo
     positionHtml = `<div class="ranking-item__icon"><img src="/assets/images/second-place-icon.webp" alt="2do Puesto"></div>`;
   } else if (position === 3) {
     modifierClass = "ranking-item--third";

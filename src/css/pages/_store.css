@@ -1,20 +1,17 @@
 .product-grid {
   display: grid;
-  /* 1. FORZAMOS 2 COLUMNAS: le decimos que siempre haya 2 columnas de igual tamaño (1fr) */
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem; /* Un poco menos de espacio para pantallas chicas */
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
 @media (min-width: 600px) {
   .product-grid {
-    /* En pantallas más grandes, podemos permitir más columnas o más espacio */
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
   }
 }
 
-/* Bloque: Tarjeta de Producto */
 .product-card {
   background-color: var(--color-surface);
   border: 2px solid var(--color-text-primary);
@@ -26,7 +23,6 @@
   flex-direction: column;
 }
 
-/* Modificador: Agotado */
 .product-card--out-of-stock {
   opacity: 0.5;
   position: relative;
@@ -45,19 +41,18 @@
 }
 
 .product-card__image {
-  /* 2. IMÁGENES RESPONSIVAS: Hacemos que la imagen se ajuste a su contenedor */
-  width: 100%; /* Ocupa el 100% del espacio disponible */
-  max-width: 120px; /* Pero nunca más de 120px */
-  height: auto; /* Mantiene la proporción */
+  width: 100%;
+  max-width: 120px;
+  height: auto;
   aspect-ratio: 1 / 1;
   margin: 0 auto 1rem;
-  object-fit: contain; /* Asegura que la imagen no se deforme */
+  object-fit: contain;
 }
 
 .product-card__name {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  flex-grow: 1; /* Para alinear los botones abajo */
+  flex-grow: 1;
 }
 
 .product-card__info {
@@ -80,7 +75,6 @@
   height: 18px;
 }
 
-/* Paginación */
 .pagination {
   display: flex;
   justify-content: center;
@@ -107,7 +101,6 @@
   cursor: not-allowed;
 }
 
-/* ... al final de _store.css ... */
 .quantity-selector {
   display: flex;
   justify-content: center;
@@ -140,7 +133,6 @@
   cursor: not-allowed;
 }
 
-/* --- NUEVOS ESTILOS PARA EL HISTORIAL --- */
 .transaction-history {
   margin-top: 3rem;
   max-width: 700px;
@@ -162,13 +154,13 @@
   padding: 1rem;
   margin-bottom: 1rem;
   display: grid;
-  grid-template-columns: 1fr auto; /* Columna para info, columna para status */
+  grid-template-columns: 1fr auto;
   gap: 0.5rem 1rem;
   align-items: center;
 }
 
 .history-item__product {
-  grid-column: 1 / -1; /* Ocupa todo el ancho */
+  grid-column: 1 / -1;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -188,24 +180,23 @@
   color: var(--color-text-inverse);
   font-size: 0.8rem;
   text-align: center;
-  justify-self: end; /* Alinear a la derecha */
+  justify-self: end;
 }
 
-/* Modificadores de estado */
 .history-item__status--pending {
-  background-color: #f9a825; /* Amarillo */
+  background-color: #f9a825;
 }
 .history-item__status--retrieved {
-  background-color: #2e7d32; /* Verde */
+  background-color: #2e7d32;
 }
 
 .store-warning {
-  color: #e53935; /* Rojo */
+  color: #e53935;
   font-weight: bold;
   text-align: center;
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
   margin-bottom: 1.5rem;
-  min-height: 2.5em; /* Para evitar que la página "salte" */
+  min-height: 2.5em;
 }

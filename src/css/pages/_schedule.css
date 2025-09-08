@@ -1,12 +1,12 @@
 .main-container {
-  padding: 0 1rem; /* Evita que el contenido se pegue a los bordes */
+  padding: 0 1rem;
 }
 
 .main-container__title {
   text-align: center;
-  color: var(--color-text-inverse); /* Usamos la variable para texto blanco */
-  text-shadow: 3px 3px 0 var(--color-text-primary); /* Sombra para legibilidad */
-  margin: 2rem 0; /* Más espacio arriba y abajo */
+  color: var(--color-text-inverse);
+  text-shadow: 3px 3px 0 var(--color-text-primary);
+  margin: 2rem 0;
   font-size: 2rem;
 }
 
@@ -24,18 +24,16 @@
   padding: 2rem;
 }
 
-/* Bloque: Item del Cronograma */
 .schedule-item {
   background-color: var(--color-surface);
   border: 2px solid var(--color-text-primary);
-  border-left-width: 8px; /* Borde izquierdo grueso para el estado */
+  border-left-width: 8px;
   border-radius: 5px;
   box-shadow: var(--box-shadow-main);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-/* Elemento: El header clickeable del item */
 .schedule-item__header {
   display: flex;
   align-items: center;
@@ -52,17 +50,16 @@
 
 .schedule-item__title {
   font-size: 1.1rem;
-  flex-grow: 1; /* Ocupa el espacio restante */
+  flex-grow: 1;
 }
 
 .schedule-item__details {
-  display: grid; /* Convertimos el contenedor en una grilla */
-  grid-template-rows: 0fr; /* Lo colapsamos a cero filas de fracción */
-  transition: grid-template-rows 0.4s ease-out; /* Animamos el cambio de filas */
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease-out;
   padding: 0 1.5rem;
 }
 
-/* El contenido directo del acordeón, para que la animación funcione */
 .schedule-item__details > div {
   overflow: hidden;
 }
@@ -82,25 +79,23 @@
   padding-left: 20px;
 }
 
-/* Modificador: Cuando el item está activo/abierto */
 .schedule-item--active .schedule-item__details {
-  grid-template-rows: 1fr; /* Le decimos que crezca a 1 fracción (todo lo que necesite) */
+  grid-template-rows: 1fr;
   padding: 1.5rem;
   border-top: 2px dashed var(--color-background-input);
 }
 
-/* Modificadores: Estados de la actividad */
 .schedule-item--finished {
-  border-left-color: #c62828; /* Rojo */
+  border-left-color: #c62828;
   opacity: 0.7;
 }
 
 .schedule-item--in-progress {
-  border-left-color: #2e7d32; /* Verde */
+  border-left-color: #2e7d32;
   transform: scale(1.02);
   box-shadow: var(--box-shadow-hover);
 }
 
 .schedule-item--upcoming {
-  border-left-color: #f9a825; /* Amarillo */
+  border-left-color: #f9a825;
 }

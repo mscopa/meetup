@@ -1,13 +1,10 @@
-/* src/css/pages/_wordsearch.css */
-
 .wordsearch-layout {
   display: flex;
-  flex-direction: column; /* Grid arriba, palabras abajo en mobile */
+  flex-direction: column;
   gap: 2rem;
   margin-top: 1rem;
 }
 
-/* Contenedor relativo para la grilla y el lienzo de las tuberías */
 .wordsearch-grid-wrapper {
   position: relative;
 }
@@ -21,7 +18,6 @@
 }
 
 .wordsearch-grid__cell {
-  /* Reutilizamos la clase de celda, pero con estilos más simples */
   aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
@@ -29,33 +25,30 @@
   font-family: var(--font-family-main);
   font-size: clamp(0.7rem, 2vw, 1.2rem);
   background-color: var(--color-surface);
-  user-select: none; /* Para que no se seleccione el texto al arrastrar */
+  user-select: none;
 }
 
-/* Modificador para la celda mientras se está seleccionando */
 .wordsearch-grid__cell--selected {
   background-color: var(--color-primary);
   color: var(--color-text-inverse);
 }
 
-/* El lienzo SVG para dibujar las tuberías */
 .pipe-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Para que los clics atraviesen el lienzo */
+  pointer-events: none;
 }
 
 .pipe-line {
-  stroke: #2e7d32; /* Verde tubería */
-  stroke-width: 18; /* Grosor de la tubería */
-  stroke-linecap: round; /* Bordes redondeados */
+  stroke: #2e7d32;
+  stroke-width: 18;
+  stroke-linecap: round;
   opacity: 0.7;
 }
 
-/* La lista de palabras a encontrar */
 .word-list {
   background-color: var(--color-surface);
   padding: 1.5rem;
@@ -74,7 +67,6 @@
   color: #2e7d32;
 }
 
-/* Layout para pantallas más grandes */
 @media (min-width: 768px) {
   .wordsearch-layout {
     flex-direction: row;
@@ -85,6 +77,6 @@
   }
   .word-list {
     flex: 1;
-    column-count: 2; /* Dividimos la lista en 2 columnas */
+    column-count: 2;
   }
 }

@@ -1,4 +1,3 @@
-/* src/css/pages/_ranking.css */
 .ranking-list {
   display: flex;
   flex-direction: column;
@@ -7,7 +6,6 @@
   margin: 0 auto;
 }
 
-/* Bloque: Item del Ranking */
 .ranking-item {
   display: flex;
   align-items: center;
@@ -47,15 +45,14 @@
   font-size: 0.9rem;
 }
 
-/* Modificadores para el Top 3 */
 .ranking-item--first {
-  border-color: #ffd700; /* Dorado */
+  border-color: #ffd700;
   transform: scale(1.05);
   box-shadow: 0 0 15px #ffd700;
 }
 .ranking-item--second {
-  border-color: #c0c0c0; /* Plata */
+  border-color: #c0c0c0;
 }
 .ranking-item--third {
-  border-color: #cd7f32; /* Bronce */
+  border-color: #cd7f32;
 }

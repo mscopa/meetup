@@ -51,12 +51,6 @@ class AuthState {
         return !!this.getToken();
     }
 
-    /**
-     * Verifica si el usuario actual tiene una habilidad específica.
-     * Usa sessionStorage para cachear los permisos y no llamar a la API constantemente.
-     * @param {string} ability El nombre de la habilidad a verificar (ej: 'purchase-products').
-     * @returns {Promise<boolean>}
-     */
     async hasAbility(ability) {
         if (!this.isAuthenticated()) {
         return false;
@@ -64,19 +58,15 @@ class AuthState {
 
         let abilities = JSON.parse(sessionStorage.getItem(this.abilitiesKey));
 
-        // --- NUEVA VERIFICACIÓN DE SEGURIDAD ---
-        // Si lo que sacamos de sessionStorage no es un array, lo ignoramos.
         if (!Array.isArray(abilities)) {
-        abilities = null; // Lo forzamos a null para que llame a la API.
+        abilities = null;
         }
 
         if (!abilities) {
         try {
             const me = await ExternalServices.getSelf();
             let apiAbilities = me.meta.abilities || [];
-            
-            // --- OTRA VERIFICACIÓN DE SEGURIDAD ---
-            // Nos aseguramos de que la respuesta de la API sea un array.
+
             if (!Array.isArray(apiAbilities)) {
                 apiAbilities = [];
             }
@@ -85,31 +75,22 @@ class AuthState {
             sessionStorage.setItem(this.abilitiesKey, JSON.stringify(abilities));
         } catch (e) {
             console.error("No se pudieron obtener los permisos del usuario", e);
-            abilities = []; // En caso de error, devolvemos un array vacío.
+            abilities = [];
         }
         }
         
-        // Ahora estamos 100% seguros de que 'abilities' es un array.
         return abilities.includes(ability) || abilities.includes('*');
     }
 
-    /**
-     * Verifica si el usuario logueado es un administrador.
-     * Lo hace revisando si el objeto de usuario guardado tiene la relación 'administrator'.
-     * @returns {boolean}
-     */
     isAdmin() {
         const user = this.getUser();
-        // El '?' es optional chaining: si user es null, no da error, solo devuelve undefined.
-        // El '!!' convierte el resultado en un booleano estricto (true/false).
         return !!user?.administrator;
     }
 
-    // No te olvides de modificar el método clear() para limpiar los permisos también
     clear() {
         localStorage.removeItem(this.tokenKey);
         localStorage.removeItem(this.userKey);
-        sessionStorage.removeItem(this.abilitiesKey); // Limpiar caché de permisos
+        sessionStorage.removeItem(this.abilitiesKey);
     }
 }
 

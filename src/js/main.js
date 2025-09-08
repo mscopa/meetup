@@ -11,12 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (AuthState.isAuthenticated()) {
-    loadHeader(); // Esta función podría usar ExternalServices.getProfileHeader() para poner el nombre del usuario
+    loadHeader();
     loadFooter();
   }
 
-  // Lógica para cargar el JS específico de cada página
-  // Podrías tener una lógica más avanzada aquí (un "router" simple)
   if (currentPath === "/") {
     import("./pages/home.js");
   } else if (currentPath.startsWith("/admin/announcements/create")) {

@@ -1,15 +1,14 @@
 import ExternalServices from "../services/ExternalServices.mjs";
-import AuthState from "../services/AuthState.mjs"; // Importamos AuthState
+import AuthState from "../services/AuthState.mjs";
 import { select, onDOMLoaded } from "../utils/helpers.js";
 
 async function initPuzzlesPage() {
   const puzzleListContainer = select("#puzzle-list");
   try {
-    // Verificamos los permisos del usuario UNA SOLA VEZ al cargar la página
     const isCounselor = await AuthState.hasAbility("toggle-puzzles");
 
     const response = await ExternalServices.getPuzzles();
-    const puzzles = response.data; // Ya no necesitamos filtrar aquí
+    const puzzles = response.data;
 
     if (puzzles.length === 0) {
       puzzleListContainer.innerHTML =
@@ -21,7 +20,6 @@ async function initPuzzlesPage() {
       .map((puzzle) => createPuzzleCard(puzzle, isCounselor))
       .join("");
 
-    // Si es consejero, añadimos la interactividad a los interruptores
     if (isCounselor) {
       addToggleInteractivity();
     }
@@ -33,7 +31,6 @@ async function initPuzzlesPage() {
 }
 
 function createPuzzleCard(puzzle, isCounselor) {
-  // El HTML del interruptor que solo se mostrará si isCounselor es true
   const toggleHtml = `
     <div class="puzzle-card__toggle">
       <span>${puzzle.is_enabled ? "Activado" : "Desactivado"}</span>
@@ -63,7 +60,6 @@ function addToggleInteractivity() {
       const isEnabled = e.target.checked;
 
       try {
-        // Bloqueamos el enlace para no navegar al hacer clic en el toggle
         e.target
           .closest("a")
           .addEventListener("click", (ev) => ev.preventDefault(), {
@@ -72,7 +68,6 @@ function addToggleInteractivity() {
 
         await ExternalServices.togglePuzzleStatus(puzzleId, isEnabled);
 
-        // Actualizamos el texto "Activado/Desactivado"
         const label = e.target
           .closest(".puzzle-card__toggle")
           .querySelector("span");
@@ -80,7 +75,6 @@ function addToggleInteractivity() {
       } catch (error) {
         console.error("Error al cambiar el estado del puzzle:", error);
         alert("No se pudo cambiar el estado del puzzle.");
-        // Revertimos el checkbox si falla la API
         e.target.checked = !isEnabled;
       }
     }

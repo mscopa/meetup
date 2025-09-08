@@ -1,53 +1,76 @@
 <!doctype html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MeetUp | Acceso</title>
     <link rel="stylesheet" href="/css/main.css" />
-  </head>
+</head>
 
-  <body>
+<body>
     <header id="header"></header>
 
     <main>
-      <img
-        src="../assets/images/login/super-meetup2025.png"
-        alt="Bienvenidos al Super MeetUp 2025"
-        class="login-header__img"
-      />
-      <div class="card login-card">
-        <h1 class="login-form__title">Iniciar Sesión</h1>
+        <img src="../assets/images/login/super-meetup2025.png" alt="Bienvenidos al Super MeetUp 2025"
+            class="login-header__img" />
+        <div class="card login-card">
+            <h1 class="login-form__title">Iniciar Sesión</h1>
 
-        <form class="login-form" id="login-form">
-          <div class="form-field">
-            <label for="username" class="form-field__label">Usuario</label>
-            <input
-              type="text"
-              id="username"
-              class="form-field__input"
-              required
-            />
-          </div>
-          <div class="form-field">
-            <label for="password" class="form-field__label">Contraseña</label>
-            <input
-              type="password"
-              id="password"
-              class="form-field__input"
-              required
-            />
-          </div>
+            <form class="login-form" id="login-form">
+                <div class="form-field">
+                    <label for="username" class="form-field__label">Usuario</label>
+                    <input type="text" id="username" class="form-field__input" required />
+                </div>
+                <div class="form-field">
+                    <label for="password" class="form-field__label">Contraseña</label>
+                    <input type="password" id="password" class="form-field__input" required />
+                </div>
 
-          <p id="error-message" class="login-container__message"></p>
+                <p id="error-message" class="login-container__message"></p>
 
-          <button type="submit" class="btn btn--primary">Ingresar</button>
-        </form>
-      </div>
+                <button type="submit" class="btn btn--primary">Ingresar</button>
+            </form>
+            <div class="card test-credentials">
+                <h3 class="test-credentials__title">Cuentas de Prueba</h3>
+                <div class="test-credentials__account">
+                    <p>minúsculas</p>
+                    <p><strong>Rol:</strong> Compañía</p>
+                    <p><strong>Usuario:</strong> company1</p>
+                    <p><strong>Contraseña:</strong> company</p>
+                    <p><strong>Pin de Consejero:</strong> PIN1 / PIN2</p>
+                </div>
+                <div class="test-credentials__account">
+                    <p><strong>Rol:</strong> Check-in</p>
+                    <p><strong>Usuario:</strong> checkin</p>
+                    <p><strong>Contraseña:</strong> checkin</p>
+                </div>
+                <div class="test-credentials__account">
+                    <p><strong>Rol:</strong> Caja</p>
+                    <p><strong>Usuario:</strong> cashier</p>
+                    <p><strong>Contraseña:</strong> cashier</p>
+                </div>
+                <div class="test-credentials__account">
+                    <p><strong>Rol:</strong> Facilitador</p>
+                    <p><strong>Usuario:</strong> facilitator</p>
+                    <p><strong>Contraseña:</strong> facilitator</p>
+                </div>
+                <div class="test-credentials__account">
+                    <p><strong>Rol:</strong> Matrimonio Director</p>
+                    <p><strong>Usuario:</strong> director</p>
+                    <p><strong>Contraseña:</strong> director</p>
+                </div>
+                <div class="test-credentials__account">
+                    <p>github.com/mscopa/meetup</p>
+                    <p>github.com/mscopa/meetup-api</p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer id="footer"></footer>
 
     <script src="/js/main.js" type="module"></script>
-  </body>
+</body>
+
 </html>

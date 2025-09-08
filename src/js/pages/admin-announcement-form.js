@@ -1,4 +1,3 @@
-// src/js/pages/admin-announcement-form.js
 import ExternalServices from "../services/ExternalServices.mjs";
 import { select, onDOMLoaded } from "../utils/helpers.js";
 import { showModal } from "../utils/modal.js";
@@ -28,7 +27,6 @@ function initCreateAnnouncementForm() {
 
       showModal("¡Éxito!", "<p>El anuncio fue publicado correctamente.</p>");
 
-      // Después de 2 segundos, redirigimos al panel de admin
       setTimeout(() => {
         window.location.href = "/admin/";
       }, 2000);

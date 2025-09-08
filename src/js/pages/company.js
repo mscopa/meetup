@@ -1,11 +1,10 @@
 // src/js/pages/company.js
 import ExternalServices from "../services/ExternalServices.mjs";
-import AuthState from "../services/AuthState.mjs"; // <-- IMPORTANTE: Añadimos AuthState
+import AuthState from "../services/AuthState.mjs";
 import { select, onDOMLoaded } from "../utils/helpers.js";
 import { showModal } from "../utils/modal.js";
 
 async function initCompanyPage() {
-  // YA NO LEEMOS LA URL. Obtenemos el usuario del estado.
   const user = AuthState.getUser();
 
   if (!user || !user.company || !user.company.id) {
@@ -14,17 +13,15 @@ async function initCompanyPage() {
     return;
   }
 
-  const companyId = user.company.id; // Obtenemos el ID desde el usuario logueado
+  const companyId = user.company.id;
   const companyInfoContainer = select("#company-info");
   const memberListContainer = select("#member-list");
 
-  // El resto del código es casi idéntico...
   try {
     const response = await ExternalServices.getCompanyDetails(companyId);
     const companyData = response.data;
     renderCompanyInfo(companyData, companyInfoContainer);
     if (await AuthState.hasAbility("purchase-products")) {
-      // Reutilizamos el permiso de consejero
       addEditFunctionality(companyData, companyInfoContainer);
     }
     renderMemberList(companyData, memberListContainer);
@@ -52,7 +49,6 @@ function addEditFunctionality(companyData, infoContainer) {
   const editForm = select("#edit-company-form");
   const memberList = select(".member-list__title");
 
-  // Creamos y añadimos el botón de Editar
   editBtnContainer.innerHTML = `<button id="edit-btn" class="btn btn--secondary">Editar Datos</button>`;
 
   const editBtn = select("#edit-btn");
@@ -63,7 +59,6 @@ function addEditFunctionality(companyData, infoContainer) {
   const roomInput = select("#room-input");
 
   const showForm = () => {
-    // Rellenamos el form con los datos actuales
     nameInput.value = companyData.name;
     warCryInput.value = companyData.war_cry;
     roomInput.value = companyData.room;
@@ -98,12 +93,11 @@ function addEditFunctionality(companyData, infoContainer) {
         "¡Éxito!",
         "<p>Los datos de la compañía se actualizaron correctamente.</p>",
       );
-      // Actualizamos los datos y la vista
       Object.assign(companyData, updatedCompany.data);
       renderCompanyInfo(companyData, infoContainer);
-      addEditFunctionality(companyData, infoContainer); // Re-añadimos el botón de editar
+      addEditFunctionality(companyData, infoContainer);
       hideForm();
-      loadHeader(); // Para actualizar el nombre en el header
+      loadHeader();
     } catch (error) {
       showModal("Error", "<p>No se pudieron actualizar los datos.</p>");
     }
@@ -111,7 +105,6 @@ function addEditFunctionality(companyData, infoContainer) {
 }
 
 function renderMemberList(data, container) {
-  // Combinamos participantes y consejeros en un solo array
   const participants = data.participants.map((p) => ({
     ...p,
     role: "Participant",
@@ -119,7 +112,6 @@ function renderMemberList(data, container) {
   const counselors = data.counselors.map((c) => ({ ...c, role: "Counselor" }));
   const allMembers = [...participants, ...counselors];
 
-  // Ordenamos el array alfabéticamente por apellido
   allMembers.sort((a, b) => a.last_name.localeCompare(b.last_name));
 
   if (allMembers.length === 0) {
@@ -127,7 +119,6 @@ function renderMemberList(data, container) {
     return;
   }
 
-  // Limpiamos el contenedor y generamos el HTML
   container.innerHTML = allMembers
     .map((member) => createMemberCard(member))
     .join("");
@@ -143,7 +134,6 @@ function createMemberCard(member) {
     badgeLetter = "P";
     badgeClass = "participant";
   } else if (member.role === "Counselor") {
-    // Manejamos los tipos de consejero
     if (member.type === "Consejero Auxiliar") {
       badgeLetter = "C.A";
       badgeClass = "auxiliary";

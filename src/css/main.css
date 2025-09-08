@@ -1,11 +1,11 @@
-/* 1. Variables and config */
+/* Variables and config */
 @import url("./base/_variables.css");
 
-/* 2. reset and base styles */
+/* reset and base styles */
 @import url("./base/_reset.css");
 @import url("./base/_typography.css");
 
-/* 3. reusable component */
+/* reusable component */
 @import url("./components/_header.css");
 @import url("./components/_buttons.css");
 @import url("./components/_card.css");
@@ -13,11 +13,10 @@
 @import url("./components/_footer.css");
 @import url("./components/_modal.css");
 
-/* 4. Layouts (si los tuvieras, como _grid.css) */
 /* @import url("./layouts/_grid.css"); */
 @import url("./layouts/_main.css");
 
-/* 5. Estilos específicos de cada página */
+/* Specific style for each page */
 @import url("./pages/_login.css");
 @import url("./pages/_home.css");
 @import url("./pages/_announcements.css");

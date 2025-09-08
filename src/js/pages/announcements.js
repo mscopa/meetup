@@ -13,10 +13,8 @@ async function initAnnouncementsPage() {
       return;
     }
 
-    // "Marcamos como leído" guardando el ID del anuncio más nuevo
     localStorage.setItem("lastReadAnnouncementId", announcements[0].id);
 
-    // Renderizamos los anuncios
     container.innerHTML = announcements.map(createAnnouncementCard).join("");
   } catch (error) {
     console.error("Error al cargar anuncios:", error);

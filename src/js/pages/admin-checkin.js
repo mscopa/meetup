@@ -2,14 +2,12 @@ import ExternalServices from "../services/ExternalServices.mjs";
 import { select, onDOMLoaded, debounce } from "../utils/helpers.js";
 import { showModal, hideModal } from "../utils/modal.js";
 
-// --- Selectores y Estado Global ---
 const listContainer = select("#participant-list");
 const searchInput = select("#search-input");
 const addParticipantBtn = select("#add-participant-btn");
 let allParticipants = [];
-let allCompanies = []; // Guardaremos las compañías aquí
+let allCompanies = [];
 
-// --- Lógica de Renderizado ---
 function renderList(participantsToShow) {
   if (participantsToShow.length === 0) {
     listContainer.innerHTML = "<p>No se encontraron participantes.</p>";
@@ -46,7 +44,6 @@ function createParticipantCard(participant) {
   `;
 }
 
-// --- Lógica de Interacción ---
 function setupSearch() {
   searchInput.addEventListener(
     "input",
@@ -54,10 +51,8 @@ function setupSearch() {
       const searchTerm = searchInput.value.toLowerCase();
 
       const filteredParticipants = allParticipants.filter((p) => {
-        // Nos aseguramos de que los campos existan antes de buscar
         const nameMatch =
           p.full_name && p.full_name.toLowerCase().includes(searchTerm);
-        // AQUÍ ESTÁ EL CAMBIO: usamos 'company_display' en lugar de 'company_name'
         const companyMatch =
           p.company_display &&
           p.company_display.toLowerCase().includes(searchTerm);
@@ -77,7 +72,6 @@ function setupCheckinControls() {
     const card = e.target.closest(".participant-card");
     const participantId = card.dataset.participantId;
 
-    // Obtenemos el estado de AMBOS checkboxes
     const attendedCheckbox = card.querySelector('[data-type="attended"]');
     const kitCheckbox = card.querySelector('[data-type="kit_delivered"]');
 
@@ -91,14 +85,12 @@ function setupCheckinControls() {
         kitDelivered,
       );
 
-      // Actualizamos la tarjeta en la lista local para que la búsqueda siga funcionando bien
       const participantInList = allParticipants.find(
         (p) => p.id == participantId,
       );
       participantInList.attended = attended;
       participantInList.kit_delivered = kitDelivered;
 
-      // Actualizamos el estilo visual
       card.classList.toggle(
         "participant-card--checked-in",
         attended && kitDelivered,
@@ -106,7 +98,6 @@ function setupCheckinControls() {
     } catch (error) {
       console.error("Error al actualizar el estado:", error);
       alert("No se pudo actualizar el estado. Intentá de nuevo.");
-      // Revertimos el cambio visual si falla la API
       e.target.checked = !e.target.checked;
     }
   });
@@ -114,7 +105,6 @@ function setupCheckinControls() {
 
 function setupAddParticipantButton() {
   addParticipantBtn.addEventListener("click", () => {
-    // Creamos el HTML del formulario para el modal
     const companyOptions = allCompanies
       .map((c) => `<option value="${c.id}">${c.number}. ${c.name}</option>`)
       .join("");
@@ -157,11 +147,11 @@ function setupAddParticipantButton() {
 
         try {
           const newParticipant = await ExternalServices.createParticipant(data);
-          allParticipants.push(newParticipant.data); // Añadimos al final de nuestra lista local
+          allParticipants.push(newParticipant.data);
           allParticipants.sort((a, b) =>
             a.full_name.localeCompare(b.full_name),
-          ); // Re-ordenamos
-          renderList(allParticipants); // Re-dibujamos la lista con el nuevo integrante
+          );
+          renderList(allParticipants);
           hideModal();
         } catch (error) {
           console.error("Error al crear participante:", error);
@@ -172,7 +162,6 @@ function setupAddParticipantButton() {
   });
 }
 
-// --- Función de Inicio ---
 async function initPage() {
   try {
     const [participantsResponse, companiesResponse] = await Promise.all([
@@ -181,12 +170,12 @@ async function initPage() {
     ]);
 
     allParticipants = participantsResponse.data;
-    allCompanies = companiesResponse; // Guardamos la lista de compañías
+    allCompanies = companiesResponse;
 
     renderList(allParticipants);
     setupSearch();
     setupCheckinControls();
-    setupAddParticipantButton(); // Activamos nuestro nuevo botón
+    setupAddParticipantButton();
   } catch (error) {
     console.error("Error al cargar la lista de check-in:", error);
     listContainer.innerHTML =

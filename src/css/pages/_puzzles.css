@@ -1,25 +1,21 @@
-/* src/css/pages/_puzzles.css */
-
 .puzzle-list {
   display: grid;
-  grid-template-columns: 1fr; /* Una columna en mobile */
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* A partir de 600px, mostramos dos columnas */
 @media (min-width: 600px) {
   .puzzle-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Bloque: Tarjeta de Puzzle */
 .puzzle-card {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-primary); /* Color naranja/durazno */
+  background-color: var(--color-primary);
   border: var(--border-width-main) solid var(--color-text-primary);
   border-radius: 8px;
   box-shadow: var(--box-shadow-main);
@@ -57,7 +53,7 @@
 
 .puzzle-card__description {
   font-size: 1rem;
-  flex-grow: 1; /* Para que todas las tarjetas tengan la misma altura */
+  flex-grow: 1;
 }
 
 .puzzle-card__toggle {

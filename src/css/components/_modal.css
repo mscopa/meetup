@@ -54,7 +54,6 @@
   line-height: 1;
 }
 
-/* Estilos para formularios dentro del modal */
 .modal-form {
   display: flex;
   flex-direction: column;

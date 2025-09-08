@@ -1,45 +1,37 @@
-/* src/css/pages/_crossword.css */
-
 .crossword-layout {
   display: flex;
-  flex-direction: column; /* Grid arriba, pistas abajo en mobile */
+  flex-direction: column;
   gap: 2rem;
   margin-top: 1rem;
 }
 
-/* Contenedor de la grilla */
 .crossword-grid {
   display: grid;
-  /* Las columnas se definen con JS usando --grid-cols */
   grid-template-columns: repeat(var(--grid-cols, 15), 1fr);
   border: var(--border-width-main) solid var(--color-text-primary);
   box-shadow: var(--box-shadow-main);
-  background-color: var(--color-text-primary); /* Relleno negro */
-  gap: 2px; /* Simula el espacio entre bloques */
+  background-color: var(--color-text-primary);
+  gap: 2px; 
 }
 
-/* Celda individual */
 .crossword-grid__cell {
-  aspect-ratio: 1 / 1; /* Para que siempre sean cuadradas */
-  background-color: var(--color-primary); /* Naranja de los bloques */
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-primary);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Modificador: Celda en blanco (no jugable) */
 .crossword-grid__cell--blank {
   background-color: transparent;
   border: none;
 }
 
-/* Modificador: Celda de ayuda (pre-llenada) */
 .crossword-grid__cell--help {
-  background-color: #f9a825; /* Amarillo, como el bloque ? */
+  background-color: #f9a825; 
 }
 
-/* El input donde el usuario escribe */
 .crossword-grid__cell__input {
   width: 100%;
   height: 100%;
@@ -56,7 +48,6 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* El número de la pista */
 .crossword-grid__cell__number {
   position: absolute;
   top: 2px;
@@ -65,15 +56,13 @@
   font-weight: bold;
 }
 
-/* Modificadores para la validación */
 .crossword-grid__cell--correct {
-  background-color: #2e7d32; /* Verde */
+  background-color: #2e7d32;
 }
 .crossword-grid__cell--incorrect {
-  background-color: #c62828; /* Rojo */
+  background-color: #c62828;
 }
 
-/* Contenedor de las pistas */
 .crossword-clues {
   background-color: var(--color-surface);
   padding: 1.5rem;
@@ -91,22 +80,20 @@
   margin-bottom: 0.5rem;
 }
 
-/* Botón de validación */
 .crossword-actions {
   text-align: center;
   margin-top: 2rem;
 }
 
-/* En pantallas más grandes, ponemos la grilla y las pistas una al lado de la otra */
 @media (min-width: 768px) {
   .crossword-layout {
     flex-direction: row;
     align-items: flex-start;
   }
   .crossword-grid {
-    flex: 2; /* La grilla ocupa 2/3 del espacio */
+    flex: 2;
   }
   .crossword-clues {
-    flex: 1; /* Las pistas ocupan 1/3 */
+    flex: 1;
   }
 }

@@ -1,8 +1,6 @@
-// src/js/pages/schedule.js
 import ExternalServices from "../services/ExternalServices.mjs";
 import { select, selectAll } from "../utils/helpers.js";
 
-// Función principal que se ejecuta al cargar la página
 async function initSchedule() {
   const container = select("#schedule-container");
 
@@ -15,16 +13,13 @@ async function initSchedule() {
       return;
     }
 
-    // Limpiamos el mensaje de "Cargando..."
     container.innerHTML = "";
 
-    // "Dibujamos" cada actividad en el DOM
     activities.forEach((activity) => {
       const activityElement = createActivityElement(activity);
       container.appendChild(activityElement);
     });
 
-    // Añadimos la funcionalidad de acordeón a todos los items
     addAccordionFunctionality();
 
     updateAllStatuses();
@@ -36,12 +31,10 @@ async function initSchedule() {
   }
 }
 
-// Función que crea el elemento HTML para una sola actividad
 function createActivityElement(activity) {
   const item = document.createElement("div");
   item.className = "schedule-item";
 
-  // --- NUEVO: Guardamos las fechas en el elemento para poder revisarlas después ---
   item.dataset.startDate = activity.start_date;
   item.dataset.endDate = activity.end_date;
 
@@ -61,22 +54,19 @@ function createActivityElement(activity) {
   return item;
 }
 
-// --- NUEVO: Función para actualizar los estados de TODAS las actividades ---
 function updateAllStatuses() {
-  console.log("Actualizando estados..."); // Podés ver esto en la consola cada 30 seg
+  console.log("Actualizando estados...");
   const now = new Date();
   selectAll(".schedule-item").forEach((item) => {
     const startDate = new Date(item.dataset.startDate);
     const endDate = new Date(item.dataset.endDate);
 
-    // Limpiamos clases de estado previas
     item.classList.remove(
       "schedule-item--upcoming",
       "schedule-item--in-progress",
       "schedule-item--finished",
     );
 
-    // Aplicamos la clase correcta
     if (now > endDate) {
       item.classList.add("schedule-item--finished");
     } else if (now >= startDate && now <= endDate) {
@@ -87,28 +77,25 @@ function updateAllStatuses() {
   });
 }
 
-// --- MEJORADO: Función de formato de hora para que sea consistente ---
 function formatTime(date) {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   const ampm = hours >= 12 ? "P. M." : "A. M.";
 
   hours = hours % 12;
-  hours = hours ? hours : 12; // La hora 0 debe ser 12
+  hours = hours ? hours : 12; 
 
-  minutes = minutes < 10 ? "0" + minutes : minutes; // Añadir cero inicial a los minutos
-  hours = hours < 10 ? "0" + hours : hours; // Añadir cero inicial a la hora
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  hours = hours < 10 ? "0" + hours : hours;
 
   return `${hours}:${minutes} ${ampm}`;
 }
 
-// Función que genera el HTML para los detalles de una actividad
 function generateDetailsHTML(details) {
   if (!details || details.length === 0) {
     return "<div><p>No hay detalles para esta actividad.</p></div>";
   }
 
-  // Envolvemos toda la salida en un único <div> para que el CSS Grid funcione
   const innerHtml = details
     .map(
       (detail) => `
@@ -125,19 +112,13 @@ function generateDetailsHTML(details) {
   return `<div>${innerHtml}</div>`;
 }
 
-// Función que añade el evento de click a cada item para el efecto acordeón
 function addAccordionFunctionality() {
   const items = selectAll(".schedule-item");
   items.forEach((item) => {
     item.addEventListener("click", () => {
-      // Opcional: Cerrar otros items al abrir uno nuevo
-      // items.forEach(otherItem => {
-      //   if (otherItem !== item) otherItem.classList.remove('schedule-item--active');
-      // });
       item.classList.toggle("schedule-item--active");
     });
   });
 }
 
-// Iniciar todo
 initSchedule();
